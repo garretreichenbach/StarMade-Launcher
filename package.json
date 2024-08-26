@@ -7,16 +7,18 @@
   "main": "lib/browser/main.js",
   "electronVersion": "1.0.0",
   "greenworksVersion": "0.4.1",
-  "javaVersion": "18.0.1.1",
+  "java18Version": "18.0.2.1",
+  "java8Version": "1.8.0_422",
+  "overrides": {
+    "graceful-fs": "^4.2.11"
+  },
   "devDependencies": {
-    "coffeescript": "^1.9.2",
     "electron-packager": "^5.0.0",
     "electron-prebuilt": "1.0.0",
     "electron-rebuild": "^1.8.4",
-    "gulp": "^3.9.0",
+    "gulp": "3.9.0",
     "gulp-asar": "git://github.com/danshick/gulp-asar.git",
     "gulp-chmod": "^1.2.0",
-    "gulp-coffee": "^2.3.1",
     "gulp-download": "0.0.1",
     "gulp-filter": "^2.0.2",
     "gulp-git": "^1.2.4",

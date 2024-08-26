@@ -36,7 +36,7 @@ and manually extract the contents to `dep/java/(platform)`, e.g. `dep/java/win64
 
 ## Copyright / License
 
-Copyright (c) Schine GmbH.
+Copyright (c) Schine GmbH. 2024
 
 All **source code** is made available under the [MIT license](LICENSE.txt).
 
