@@ -292,7 +292,7 @@ gulp.task('default', ['run']);
 
 gulp.task('bootstrap', ['greenworks', 'java']);
 
-gulp.task('build', ['build-hash', 'jade', 'less', 'copy', 'acknowledge']);
+gulp.task('build', ['build-hash', 'js', 'jade', 'less', 'copy', 'acknowledge']);
 
 gulp.task('build-hash', function () {
     build_hash = cp.execSync('git rev-parse --short HEAD', {encoding: 'utf8'}).trim();
@@ -301,6 +301,8 @@ gulp.task('build-hash', function () {
     fs.writeFileSync(path.join(paths.build.lib.dir, "buildHash.js"), buildHashJS);
     return console.log(`BUILD HASH: ${build_hash}`);
 });
+
+gulp.task('js', () => gulp.src(paths.src.glob).pipe(plugins.sourcemaps.write()).pipe(gulp.dest(paths.build.lib.dir)));
 
 gulp.task('electron-packager', ['build', 'acknowledge'], function (callback) {
     const packager = require('electron-packager');
@@ -337,16 +339,6 @@ gulp.task('greenworks', () => plugins.download(GREENWORKS_URL + `/greenworks-v${
     .pipe(gulp.dest(paths.dep.greenworks.dir)));
 
 const javaTasks = [];
-
-gulp.task('test-java-8', () => plugins.download(`https://s3.amazonaws.com/sm-launcher/java/jre-${java8Version}-windows-x64.tar.gz`)
-    .pipe(plugins.gunzip())
-    .pipe(untar())
-    .pipe(gulp.dest(path.join(paths.dep.java.dir, "win64"))));
-
-gulp.task('test-java-18', () => plugins.download(`https://s3.amazonaws.com/sm-launcher/java/jre-${java18Version}-windows-x64.tar.gz`)
-    .pipe(plugins.gunzip())
-    .pipe(untar())
-    .pipe(gulp.dest(path.join(paths.dep.java.dir, "win64"))));
 
 const downloadJava8Task = platform => (function () {
     console.log(`Testing java downloading: platform ${platform}`);
