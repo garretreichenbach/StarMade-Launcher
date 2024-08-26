@@ -4,7 +4,6 @@
   "private": true,
   "version": "3.0.0",
   "description": "Launcher for StarMade",
-  "main": "lib/browser/main.js",
   "electronVersion": "1.0.0",
   "greenworksVersion": "0.4.1",
   "java18Version": "18.0.2.1",

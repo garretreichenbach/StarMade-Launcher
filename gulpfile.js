@@ -366,7 +366,7 @@ const downloadJava18Task = platform => (function () {
 
 for (platform in java8.url) {
     var url = java8.url[platform];
-    taskName = `java-${platform}`;
+    taskName = `java8-${platform}`;
     gulp.task(taskName, downloadJava8Task(platform));
     javaTasks.push(taskName);
 }
