@@ -1,0 +1,41 @@
+ul.council-links {
+    width: 100px;
+    height: 100px;
+    left: 149px;
+}
+
+ul.council-news {
+    width: 280px !important;
+    height: 58px !important;
+}
+
+div.council-side {
+    float: right;
+    text-align: center;
+    width: 208px;
+}
+
+div.council-side img {
+    width: 155px;
+}
+
+a.setFavicon {
+    background-repeat: no-repeat;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+    background-size: 16px 16px;
+    background-position: left center;
+    padding-left: 18px;
+}
+
+.avatar img {
+    border-radius: 100%;
+}
+
+.inTextMiniMe img {
+    margin-right: 2px;
+    margin-bottom: -2px;
+    width: 12px;
+    height: 12px;
+}

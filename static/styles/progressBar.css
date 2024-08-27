@@ -1,13 +1,14 @@
 div.progress {
-  background-image: url(../images/main/update_load_empty.png);
-  bottom: 0;
-  position: absolute;
-  right: 0;
-  height: 108px;
-  transition: .3s;
-  width: 300px;
+    background-image: url(../images/main/update_load_empty.png);
+    bottom: 0;
+    position: absolute;
+    right: 0;
+    height: 108px;
+    transition: .3s;
+    width: 300px;
+}
 
-  span {
+div.progress span {
     color: #FFFFFF;
     left: 0;
     padding: 4px;
@@ -15,14 +16,13 @@ div.progress {
     text-align: center;
     top: 0;
     width: 100%;
-  }
+}
 
-  div.progress-bar {
+div.progress div.progress-bar {
     background-color: #F28D0F;
     height: 54px;
     left: 72px;
     position: relative;
     top: 37px;
     width: 0;
-  }
 }

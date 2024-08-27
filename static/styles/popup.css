@@ -1,0 +1,125 @@
+div.popup div.popup-overlay {
+    background-color: #0F0F13;
+    height: 346px;
+    opacity: 0.9;
+    position: absolute;
+    top: 97px;
+    width: 100%;
+}
+
+div.popup div.popup-container {
+    box-shadow: -5px 4px 0 rgba(0, 0, 0, 0.2);
+    left: 25%;
+    position: absolute;
+    top: 25%;
+    width: 420px;
+}
+
+div.popup div.popup-container div.popup-header {
+    background-color: #121526;
+    background-repeat: no-repeat;
+    background-position: 9px;
+    color: #FFFFFF;
+    font-size: 14px;
+    font-family: 'Ubuntu';
+    font-weight: bold;
+    height: 37px;
+    padding: 10px 10px 10px 32px;
+    text-transform: uppercase;
+}
+
+div.popup div.popup-container div.popup-header.notification {
+    background-image: url(../images/main/popup_notification_header_icon.png);
+}
+
+div.popup div.popup-container div.popup-header.settings {
+    background-image: url(../images/main/popup_settings_header_icon.png);
+}
+
+div.popup div.popup-container div.popup-header.tooltip {
+    background-image: url(../images/main/tooltip_popup_icon.png);
+}
+
+div.popup div.popup-container div.popup-header a.popup-close {
+    background-image: url(../images/main/popup_settings_header_close.png);
+    background-repeat: no-repeat;
+    float: right;
+    height: 13px;
+    width: 14px;
+}
+
+div.popup div.popup-container div.popup-body {
+    background-color: #0F0F13;
+    border: 1px solid #393942;
+    border-top: 1px solid #1D1C2A;
+    color: #A1A6AC;
+    font-family: 'Ubuntu';
+    font-size: 12px;
+    font-weight: lighter;
+    padding: 13px 13px 13px 8px;
+}
+
+div.popup div.popup-container div.popup-body .bright {
+    color: white;
+}
+
+div.popup div.popup-container div.popup-body p:first-child {
+    margin-top: 0;
+}
+
+div.popup div.popup-container div.popup-body p:last-child {
+    margin-bottom: 0;
+}
+
+div.popup div.popup-container div.popup-body div.field-group,
+div.popup div.popup-container div.popup-body div.field-group.block {
+    display: block;
+    float: none;
+    margin: 0;
+}
+
+div.popup div.popup-container div.popup-body div.field-group:not(:first-child),
+div.popup div.popup-container div.popup-body div.field-group.block:not(:first-child) {
+    margin-top: 16px;
+}
+
+div.popup div.popup-container div.popup-body div.field-group label,
+div.popup div.popup-container div.popup-body div.field-group.block label {
+    display: inline-block;
+    margin-bottom: 8px;
+}
+
+div.popup div.popup-container div.popup-body div.field-group input.wide,
+div.popup div.popup-container div.popup-body div.field-group.block input.wide {
+    width: 325px;
+}
+
+div.popup div.popup-container div.popup-body div.field-group button:not(:first-child),
+div.popup div.popup-container div.popup-body div.field-group.block button:not(:first-child) {
+    margin-left: 4px;
+}
+
+div.popup div.popup-container div.popup-body form.side-by-side {
+    overflow: hidden;
+}
+
+div.popup div.popup-container div.popup-body form.side-by-side div.field-group {
+    float: left;
+    margin-top: 0;
+}
+
+div.popup div.popup-container div.popup-body form.side-by-side div.field-group:not(:first-child):not(.block) {
+    margin-left: 14px;
+}
+
+div.popup div.popup-container div.popup-body form.side-by-side div.field-group label {
+    width: 123px;
+}
+
+div.popup div.popup-container div.popup-body form.side-by-side div.field-group input {
+    width: 106px;
+}
+
+div.popup div.popup-container div.popup-body form.side-by-side div.field-group input[type="checkbox"] {
+    width: auto;
+}

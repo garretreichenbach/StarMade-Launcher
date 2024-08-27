@@ -1,0 +1,319 @@
+body.auth {
+    background-color: #0F0F13;
+    cursor: default;
+    font-size: 12px;
+    overflow: hidden;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+body.auth img.logo {
+    -webkit-app-region: drag;
+}
+
+body.auth a#close {
+    position: absolute;
+    right: 8px;
+    top: 6px;
+    -webkit-app-region: no-drag;
+}
+
+body.auth ul.tabs {
+    list-style: none;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+}
+
+body.auth ul.tabs li {
+    float: left;
+    padding: 5px 0 9px;
+    width: 127px;
+}
+
+body.auth ul.tabs li a {
+    color: #A1A6AC;
+    cursor: pointer;
+}
+
+body.auth ul.tabs li.uplinkTab a,
+body.auth ul.tabs li.uplinkTab span {
+    display: block;
+    padding-left: 20px;
+}
+
+body.auth ul.tabs li.guestTab a,
+body.auth ul.tabs li.guestTab span {
+    display: block;
+    padding-right: 20px;
+    text-align: right;
+}
+
+body.auth ul.tabs li.registerTab {
+    width: 100%;
+}
+
+body.auth ul.tabs li.registerTab span {
+    display: block;
+    margin-top: 2px;
+    padding-left: 16px;
+}
+
+body.auth form {
+    background-repeat: no-repeat;
+    height: 256px;
+    margin-top: -2px;
+    overflow: hidden;
+}
+
+body.auth form#uplink {
+    background-image: url(../images/auth/tab_left.png);
+}
+
+body.auth form#uplink #status {
+    margin-top: 2px;
+}
+
+body.auth form#uplink a#uplinkSubmit {
+    background-image: url(../images/auth/login_btn.png);
+    background-repeat: no-repeat;
+    float: left;
+    left: -2px;
+    height: 137px;
+    position: absolute;
+    top: 267px;
+    width: 255px;
+    z-index: 0;
+}
+
+body.auth form#uplink a#uplinkSubmit:hover {
+    background-image: url(../images/auth/login_over.png);
+}
+
+body.auth form#uplink div#uplinkSubmitCover {
+    height: 37px;
+    left: 0;
+    position: absolute;
+    top: 323px;
+    width: 17px;
+    z-index: 1;
+}
+
+body.auth form#uplink div.options {
+    font-size: 11px;
+    left: 86px;
+    padding-left: 7px;
+    position: absolute;
+    top: 322px;
+    z-index: 2;
+}
+
+body.auth form#uplink div.options label#rememberMeLabel {
+    cursor: pointer;
+    display: block;
+    float: left;
+    padding: 3px 0 0;
+}
+
+body.auth form#uplink div.options a#rememberMe {
+    background-color: #1B1D29;
+    border: 2px solid #2E303C;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: block;
+    font-family: Dingbats, fantasy;
+    font-size: 11px;
+    float: left;
+    height: 18px;
+    margin-left: 4px;
+    padding-left: 1px;
+    text-align: center;
+    width: 18px;
+}
+
+body.auth form#uplink div.options ul {
+    list-style: none;
+    margin: 5px 0 0;
+    padding: 0;
+}
+
+body.auth form#uplink div.options ul li {
+    float: left;
+}
+
+body.auth form#uplink div.options ul li a {
+    color: #309CA9;
+    text-decoration: underline;
+    margin-right: 4px;
+}
+
+body.auth form#uplink div.options ul li a:last-child {
+    margin-right: 0;
+}
+
+body.auth form#uplink div.options ul li a:hover {
+    color: #24EFF2;
+}
+
+body.auth form#guest {
+    background-image: url(../images/auth/tab_right.png);
+}
+
+body.auth form#guest div.fields {
+    height: 143px;
+}
+
+body.auth form#guest p {
+    font-size: 11px;
+    text-align: center;
+}
+
+body.auth form#guest a#guestSubmit {
+    background-image: url(../images/auth/playguest_btn.png);
+    background-repeat: no-repeat;
+    float: left;
+    left: 0;
+    height: 146px;
+    position: absolute;
+    top: 258px;
+    width: 255px;
+    z-index: 0;
+}
+
+body.auth form#guest a#guestSubmit:hover {
+    background-image: url(../images/auth/playguest_over.png);
+}
+
+body.auth form#guest div#guestSubmitLeftCover {
+    height: 37px;
+    left: 0;
+    position: absolute;
+    top: 327px;
+    width: 52px;
+    z-index: 1;
+}
+
+body.auth form#guest div#guestSubmitRightCover {
+    height: 37px;
+    right: 0;
+    position: absolute;
+    top: 327px;
+    width: 58px;
+    z-index: 1;
+}
+
+body.auth form#register {
+    background-image: url(../images/auth/register_content_bg.png);
+}
+
+body.auth form#register a#registerBack {
+    cursor: pointer;
+    left: 4px;
+    position: absolute;
+    top: 4px;
+    -webkit-app-region: no-drag;
+}
+
+body.auth form#register div.fields {
+    height: auto;
+    width: auto;
+}
+
+body.auth form#register div.fields label#subscribeLabel {
+    font-size: 10px;
+    margin-left: 20px;
+    white-space: nowrap;
+}
+
+body.auth form#register div.fields a#subscribe {
+    background-color: #1B1D29;
+    border: 2px solid #2E303C;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: block;
+    font-size: 8px;
+    float: left;
+    height: 16px;
+    margin-left: 0;
+    margin-top: -17px;
+    padding-left: 1px;
+    text-align: center;
+    width: 16px;
+}
+
+body.auth form#register div.fields div#registerStatus {
+    margin-top: 2px;
+}
+
+body.auth form#register p {
+    font-size: 11px;
+    text-align: center;
+}
+
+body.auth form#register div#registerSubmitBg {
+    background-image: url(../images/auth/register_btn.png);
+    background-repeat: no-repeat;
+    left: 0;
+    height: 164px;
+    position: absolute;
+    top: 326px;
+    transition: .3s;
+    width: 255px;
+    z-index: 0;
+}
+
+body.auth form#register div#registerSubmitBg.hover {
+    background-image: url(../images/auth/register_over.png);
+}
+
+body.auth form#register a#registerSubmit {
+    left: 18px;
+    height: 39px;
+    position: absolute;
+    top: 393px;
+    width: 218px;
+    z-index: 1;
+}
+
+body.auth form#register div.options {
+    font-size: 10px;
+    left: 18px;
+    position: absolute;
+    top: 437px;
+}
+
+body.auth form#register div.options a {
+    color: #309CA9;
+    text-decoration: underline;
+}
+
+body.auth form#register div.options a:hover {
+    color: #24EFF2;
+}
+
+body.auth form div.fields {
+    height: 138px;
+    left: 16px;
+    position: absolute;
+    top: 184px;
+    width: 223px;
+    z-index: 1;
+}
+
+body.auth form div.fields label {
+    display: block;
+    padding: 4px 0;
+}
+
+body.auth form div.fields input:not([type='checkbox']) {
+    background-color: #1B1D29;
+    border: 2px solid #2E303C;
+    color: #FFFFFF;
+    margin-bottom: 8px;
+    padding: 4px 8px;
+    width: 100%;
+}
+
+body.auth footer {
+    width: 255px;
+}

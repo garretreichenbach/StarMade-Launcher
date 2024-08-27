@@ -125,7 +125,7 @@ const paths = {
 			glob: 'static/**/*.html'
 		},
 		styles: {
-			main: 'static/styles/main.less'
+			main: 'static/styles/main.css'
 		}
 	},
 	steamAppid: 'steam_appid.txt'
@@ -294,7 +294,7 @@ gulp.task('default', ['run']);
 gulp.task('bootstrap', [/*'greenworks',*/ 'java']);
 
 // gulp.task('build', ['build-hash', 'js', 'jade', 'less', 'copy', 'acknowledge']);
-gulp.task('build', ['build-hash', 'js', 'html', 'less', 'copy', 'acknowledge']);
+gulp.task('build', ['build-hash', 'js', 'html', 'css', 'copy', 'acknowledge']);
 
 gulp.task('build-hash', function () {
 	build_hash = cp.execSync('git rev-parse --short HEAD', {encoding: 'utf8'}).trim();
@@ -379,8 +379,7 @@ gulp.task('html', () => gulp.src(paths.static.html.glob)
 	.pipe(wiredep())
 	.pipe(gulp.dest(paths.build.static.dir)));
 
-gulp.task('less', () => gulp.src(paths.static.styles.main)
-	.pipe(plugins.less())
+gulp.task('css', () => gulp.src(paths.static.styles.main)
 	.pipe(gulp.dest(paths.build.static.styles.dir)));
 
 const copyTasks = [

@@ -1,0 +1,76 @@
+ul.support-links {
+    right: 18px;
+}
+
+div.support-content {
+    width: 790px;
+}
+
+div.support-content h1 {
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0 8px;
+    line-height: 50px;
+    text-transform: none;
+}
+
+div.support-content ul.faq {
+    margin: 0 4px;
+    padding: 0;
+    list-style: none;
+    width: 743px;
+}
+
+div.support-content ul.faq li {
+    background-color: #24242A;
+    border: 1px solid #393942;
+    color: #FFFFFF;
+    margin: 4px;
+    width: 738px;
+}
+
+div.support-content ul.faq li h2 {
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: normal;
+    margin: 0 8px;
+    line-height: 25px;
+}
+
+div.support-content ul.faq li h2 span.toggle {
+    display: block;
+    float: right;
+    font-family: 'Webdings';
+    font-size: 14px;
+}
+
+div.support-content ul.faq li h2 span.toggle.collapsed:before {
+    content: "3";
+}
+
+div.support-content ul.faq li h2 span.toggle.expanded:before {
+    content: "6";
+}
+
+div.support-content ul.faq li p {
+    font-size: 12px;
+    padding: 0 8px;
+    text-align: justify;
+    color: #91A6BC;
+}
+
+div.support-content ul.faq li p:first-child {
+    padding-top: 0;
+}
+
+div.support-content ul.faq li p ol {
+    margin-left: -1em;
+}
+
+div.support-content ul.faq li p ol li {
+    width: 100%;
+    border: none;
+    text-align: justify;
+    color: #91A6BC;
+}

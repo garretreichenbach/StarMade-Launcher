@@ -1,8 +1,4 @@
-
-.popup.broadcast {
-  .message {
+.popup.broadcast .message {
     height: 18em;
     overflow: auto;
-  }
 }
-
