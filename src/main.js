@@ -14,12 +14,11 @@ const {
 const {
     remote
 } = electron;
-const electronApp = remote;
+const electronApp = remote.app;
 
 let {
     buildHash
-// } = require('../buildHash.js');
-} = '4882c5e';
+} = require('../buildHash.js');
 const util = require('./util');
 
 const pkg = require(path.join(path.dirname(__dirname), 'package.json'));

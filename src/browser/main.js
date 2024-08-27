@@ -357,6 +357,9 @@
         };
     })(this));
 
+    //print the current working directory
+    log.verbose("Current working directory: " + process.cwd());
+
     staticDir = path.join(path.dirname(path.dirname(__dirname)), 'static');
 
     gettingStartedWindow = null;
