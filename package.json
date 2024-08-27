@@ -16,7 +16,7 @@
 		"electron-packager": "^17.1.2",
 		"electron-prebuilt": "1.4.13",
 		"electron-rebuild": "^3.2.9",
-		"gulp": "^5.0.0",
+		"gulp": "3.9.0",
 		"gulp-asar": "git://github.com/danshick/gulp-asar.git",
 		"gulp-chmod": "^4.0.0",
 		"gulp-download": "0.0.1",

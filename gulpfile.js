@@ -291,21 +291,10 @@ const onWarning = error => gutil.log("Warning: " + error.message);
 gulp.task('default', () => run());
 
 // gulp.task('bootstrap', ['greenworks', 'java']);
-gulp.task('bootstrap', () => {
-    return async.eachSeries(['greenworks', 'java'], (task, callback) => gulp.start(task, callback));
-});
+gulp.task('bootstrap', ['greenworks', 'java']);
 
 // gulp.task('build', ['build-hash', 'js', 'jade', 'less', 'copy', 'acknowledge']);
-gulp.task('build', () => {
-    return async.series([
-        'build-hash',
-        'js',
-        'jade',
-        'less',
-        'copy',
-        'acknowledge'
-    ], (task, callback) => gulp.start(task, callback));
-});
+gulp.task('build', ['build-hash', 'js', 'jade', 'less', 'copy', 'acknowledge']);
 
 gulp.task('build-hash', function () {
     build_hash = cp.execSync('git rev-parse --short HEAD', {encoding: 'utf8'}).trim();
@@ -318,10 +307,7 @@ gulp.task('build-hash', function () {
 gulp.task('js', () => gulp.src(paths.src.glob).pipe(plugins.sourcemaps.write()).pipe(gulp.dest(paths.build.lib.dir)));
 
 // gulp.task('electron-packager', ['build', 'acknowledge'], function (callback) {
-gulp.task('electron-packager', function (callback) {
-    async.series(['build', 'acknowledge'], function (task, callback) {
-        return gulp.start(task, callback);
-    });
+gulp.task('electron-packager', ['build', 'acknowledge'], callback => {
     const packager = require('electron-packager');
 
     return packager({
@@ -388,7 +374,7 @@ for (platform in java18.url) {
 }
 
 // gulp.task('java', javaTasks);
-gulp.task('java', () => async.series(javaTasks, (task, callback) => gulp.start(task, callback)));
+gulp.task('java', javaTasks);
 
 gulp.task('jade', () => gulp.src(paths.static.jade.glob)
     .pipe(plugins.jade({
@@ -452,14 +438,14 @@ gulp.task('acknowledge-clear', callback => fs.unlink(licenses, function (err) {
     }
 }));
 
-gulp.task('acknowledge-starmade', () => {return async.series(['acknowledge-clear'], (task, callback) => gulp.start(task, callback));}, callback => fs.readFile(path.join(paths.res.licenses.dir, 'starmade'), function (err, contents) {
+gulp.task('acknowledge-starmade', ['acknowledge-clear'], callback => fs.readFile(path.join(paths.res.licenses.dir, 'starmade'), function (err, contents) {
     const data = contents + '\n' +
         'This application contains third-party libraries and fonts in accordance with the following\nlicenses:\n' +
         '--------------------------------------------------------------------------------\n\n';
     return fs.appendFile(licenses, data, callback);
 }));
 
-gulp.task('acknowledge-electron', () => {return async.series(['acknowledge-clear', 'acknowledge-starmade'], (task, callback) => gulp.start(task, callback));}, callback => fs.readFile(path.join(paths.res.licenses.dir, 'electron'), function (err, data) {
+gulp.task('acknowledge-electron', ['acknowledge-clear', 'acknowledge-starmade'], callback => fs.readFile(path.join(paths.res.licenses.dir, 'electron'), function (err, data) {
     if (err) {
         return callback(err);
     }
@@ -469,7 +455,7 @@ gulp.task('acknowledge-electron', () => {return async.series(['acknowledge-clear
     return fs.appendFile(licenses, data, callback);
 }));
 
-gulp.task('acknowledge-bebas-neue',  () => {return async.series(['acknowledge-clear', 'acknowledge-starmade'], (task, callback) => gulp.start(task, callback));}, callback => fs.readFile(path.join(paths.res.licenses.dir, 'bebas_neue'), function (err, data) {
+gulp.task('acknowledge-bebas-neue', ['acknowledge-clear', 'acknowledge-starmade'], callback => fs.readFile(path.join(paths.res.licenses.dir, 'bebas_neue'), function (err, data) {
     if (err) {
         return callback(err);
     }
@@ -479,7 +465,7 @@ gulp.task('acknowledge-bebas-neue',  () => {return async.series(['acknowledge-cl
     return fs.appendFile(licenses, data, callback);
 }));
 
-gulp.task('acknowledge-ubuntu', () => {return async.series(['acknowledge-clear', 'acknowledge-starmade'], (task, callback) => gulp.start(task, callback));}, callback => fs.readFile(path.join(paths.res.licenses.dir, 'ubuntu'), function (err, data) {
+gulp.task('acknowledge-ubuntu', ['acknowledge-clear', 'acknowledge-starmade'], callback => fs.readFile(path.join(paths.res.licenses.dir, 'ubuntu'), function (err, data) {
     if (err) {
         return callback(err);
     }
@@ -489,7 +475,7 @@ gulp.task('acknowledge-ubuntu', () => {return async.series(['acknowledge-clear',
     return fs.appendFile(licenses, data, callback);
 }));
 
-gulp.task('acknowledge-java-8', () => {return async.series(['acknowledge-clear', 'acknowledge-starmade'], (task, callback) => gulp.start(task, callback));}, callback => fs.readFile(path.join(java8.dir[process.platform][process.arch], util.getJreDirectory(java8Version), 'LICENSE'), function (err, data) {
+gulp.task('acknowledge-java-8', ['acknowledge-clear', 'acknowledge-starmade'], callback => fs.readFile(path.join(java8.dir[process.platform][process.arch], util.getJreDirectory(java8Version), 'LICENSE'), function (err, data) {
     if (err) {
         return callback(err);
     }
@@ -498,7 +484,7 @@ gulp.task('acknowledge-java-8', () => {return async.series(['acknowledge-clear',
         data.toString() + '\n';
     return fs.appendFile(licenses, data, callback);
 }));
-gulp.task('acknowledge-java-18', () => {return async.series(['acknowledge-clear', 'acknowledge-starmade'], (task, callback) => gulp.start(task, callback));}, callback => fs.readFile(path.join(java18.dir[process.platform][process.arch], util.getJreDirectory(java18Version), 'LICENSE'), function (err, data) {
+gulp.task('acknowledge-java-18', ['acknowledge-clear', 'acknowledge-starmade'], callback => fs.readFile(path.join(java18.dir[process.platform][process.arch], util.getJreDirectory(java18Version), 'LICENSE'), function (err, data) {
     if (err) {
         return callback(err);
     }
@@ -508,7 +494,7 @@ gulp.task('acknowledge-java-18', () => {return async.series(['acknowledge-clear'
     return fs.appendFile(licenses, data, callback);
 }));
 
-gulp.task('acknowledge-java-8-thirdparty', () => {return async.series(['acknowledge-clear', 'acknowledge-starmade', 'acknowledge-java-8'], (task, callback) => gulp.start(task, callback));}, callback => fs.readFile(path.join(java8.dir[process.platform][process.arch], util.getJreDirectory(java8Version), 'THIRDPARTYLICENSEREADME.txt'), function (err, data) {
+gulp.task('acknowledge-java-8-thirdparty', ['acknowledge-clear', 'acknowledge-starmade', 'acknowledge-java-8'], callback => fs.readFile(path.join(java8.dir[process.platform][process.arch], util.getJreDirectory(java8Version), 'THIRDPARTYLICENSEREADME.txt'), function (err, data) {
     if (err) {
         return callback(err);
     }
@@ -518,7 +504,7 @@ gulp.task('acknowledge-java-8-thirdparty', () => {return async.series(['acknowle
     return fs.appendFile(licenses, data, callback);
 }));
 
-gulp.task('acknowledge-java-18-thirdparty', () => {return async.series(['acknowledge-clear', 'acknowledge-starmade', 'acknowledge-java-18'], (task, callback) => gulp.start(task, callback));}, callback => fs.readFile(path.join(java18.dir[process.platform][process.arch], util.getJreDirectory(java18Version), 'THIRDPARTYLICENSEREADME.txt'), function (err, data) {
+gulp.task('acknowledge-java-18-thirdparty', ['acknowledge-clear', 'acknowledge-starmade', 'acknowledge-java-18'], callback => fs.readFile(path.join(java18.dir[process.platform][process.arch], util.getJreDirectory(java18Version), 'THIRDPARTYLICENSEREADME.txt'), function (err, data) {
     if (err) {
         return callback(err);
     }
@@ -528,7 +514,7 @@ gulp.task('acknowledge-java-18-thirdparty', () => {return async.series(['acknowl
     return fs.appendFile(licenses, data, callback);
 }));
 
-gulp.task('acknowledge-java-8-thirdparty-javafx',  () => {return async.series(['acknowledge-clear', 'acknowledge-starmade', 'acknowledge-java-8', 'acknowledge-java-8-thirdparty'], (task, callback) => gulp.start(task, callback));}, callback => fs.readFile(path.join(java8.dir[process.platform][process.arch], util.getJreDirectory(java8Version), 'THIRDPARTYLICENSEREADME-JAVAFX.txt'), function (err, data) {
+gulp.task('acknowledge-java-8-thirdparty-javafx', ['acknowledge-clear', 'acknowledge-starmade', 'acknowledge-java-8', 'acknowledge-java-8-thirdparty'], callback => fs.readFile(path.join(java8.dir[process.platform][process.arch], util.getJreDirectory(java8Version), 'THIRDPARTYLICENSEREADME-JAVAFX.txt'), function (err, data) {
     if (err) {
         return callback(err);
     }
@@ -538,7 +524,7 @@ gulp.task('acknowledge-java-8-thirdparty-javafx',  () => {return async.series(['
     return fs.appendFile(licenses, data, callback);
 }));
 
-gulp.task('acknowledge-java-18-thirdparty-javafx', () => {return async.series(['acknowledge-clear', 'acknowledge-starmade', 'acknowledge-java-18', 'acknowledge-java-18-thirdparty'], (task, callback) => gulp.start(task, callback));}, callback => fs.readFile(path.join(java18.dir[process.platform][process.arch], util.getJreDirectory(java18Version), 'THIRDPARTYLICENSEREADME-JAVAFX.txt'), function (err, data) {
+gulp.task('acknowledge-java-18-thirdparty-javafx', ['acknowledge-clear', 'acknowledge-starmade', 'acknowledge-java-18', 'acknowledge-java-18-thirdparty'], callback => fs.readFile(path.join(java18.dir[process.platform][process.arch], util.getJreDirectory(java18Version), 'THIRDPARTYLICENSEREADME-JAVAFX.txt'), function (err, data) {
     if (err) {
         return callback(err);
     }
@@ -548,7 +534,7 @@ gulp.task('acknowledge-java-18-thirdparty-javafx', () => {return async.series(['
     return fs.appendFile(licenses, data, callback);
 }));
 
-gulp.task('acknowledge-greenworks', () => {return async.series(['acknowledge-clear', 'acknowledge-starmade'],(task, callback) => gulp.start(task, callback));}, callback => fs.readFile(path.join(paths.res.licenses.dir, 'greenworks'), function (err, data) {
+gulp.task('acknowledge-greenworks', ['acknowledge-clear', 'acknowledge-starmade'], callback => fs.readFile(path.join(paths.res.licenses.dir, 'greenworks'), function (err, data) {
     if (err) {
         return callback(err);
     }
@@ -579,7 +565,7 @@ var acknowledgeModuleTask = function (name, dir) {
             depModulesDir = path.resolve(path.join(depModulesDir, '..', '..'));
         }
 
-        gulp.task(acknowledgeTaskName, () => {return async.series(['acknowledge-clear', 'acknowledge-starmade'], (task, callback) => gulp.start(task, callback));}, acknowledgeModuleTask(depName, depModulesDir));
+        gulp.task(acknowledgeTaskName, ['acknowledge-clear', 'acknowledge-starmade'], acknowledgeModuleTask(depName, depModulesDir));
         acknowledgeTasks.push(acknowledgeTaskName);
     }
 
@@ -726,7 +712,7 @@ for (name in pkg.dependencies) {
     var copyTaskName = `copy-module-${name}`;
     acknowledgeTaskName = `acknowledge-module-${name}`;
     gulp.task(copyTaskName, copyModuleTask(name));
-    gulp.task(acknowledgeTaskName, () => {return async.series(['acknowledge-clear', 'acknowledge-starmade'], (task, callback) => gulp.start(task, callback))}, acknowledgeModuleTask(name));
+    gulp.task(acknowledgeTaskName, ['acknowledge-clear', 'acknowledge-starmade'], acknowledgeModuleTask(name));
     copyTasks.push(copyTaskName);
     acknowledgeTasks.push(acknowledgeTaskName);
 }
@@ -735,14 +721,14 @@ for (name in pkg.dependencies) {
 // licenses file
 for (name in bower.dependencies) {
     acknowledgeTaskName = `acknowledge-bower-module-${name}`;
-    gulp.task(acknowledgeTaskName, () => {return async.series(['acknowledge-clear', 'acknowledge-starmade'],(task, callback) => gulp.start(task, callback))}, acknowledgeBowerModuleTask(name));
+    gulp.task(acknowledgeTaskName, ['acknowledge-clear', 'acknowledge-starmade'], acknowledgeBowerModuleTask(name));
     acknowledgeTasks.push(acknowledgeTaskName);
 }
 
 gulp.task('copy', copyTasks);
 gulp.task('acknowledge', acknowledgeTasks);
 
-gulp.task('package', () => {return async.series(['build', 'electron-packager', 'package-greenworks', 'package-java', 'package-redistributables', 'package-steam-appid'],(task, callback) => gulp.start(task, callback));});
+gulp.task('package', ['build', 'electron-packager', 'package-greenworks', 'package-java', 'package-redistributables', 'package-steam-appid']);
 
 const packageGreenworksTasks = [
     'electron-packager'
