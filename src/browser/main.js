@@ -4,7 +4,7 @@
         electron, gettingStartedWindow, ipc, launcherUpdating, loadFailure, log, log_level, mainWindow,
         openGettingStartedWindow, openMainWindow, path, quitting, rimraf, shell, staticDir, updatingWindow;
 
-    argv = require('minimist')(process.argv.slice(1));
+    argv = (process.argv.slice(1));
 
     path = require('path');
 
@@ -43,8 +43,8 @@
 
     global.version = require(path.join(__dirname, '..', '..', 'package.json')).version;
 
-    global.buildHash = require('../buildHash.js').buildHash;
-
+    // global.buildHash = require('../buildHash.js').buildHash;
+    global.buildHash = '4882c5e';
     global.qa = false;
 
     if (argv.help != null) {
@@ -69,7 +69,7 @@
 
     electron = require('electron');
 
-    rimraf = require('rimraf');
+    // rimraf = require('rimraf');
 
     log = require('../log.js');
 

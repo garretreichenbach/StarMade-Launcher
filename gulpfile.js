@@ -134,6 +134,7 @@ const paths = {
 const bower = require(paths.bower);
 const pkg = require(paths.package);
 const {run} = require("node:test");
+const {mkdir} = require("node:fs");
 const {
     electronVersion
 } = pkg;
@@ -432,7 +433,7 @@ const acknowledgeTasks = [
 
 gulp.task('acknowledge-clear', callback => fs.unlink(licenses, function (err) {
     if (err) {
-        return mkdirp(paths.build.static.dir, callback);
+        return mkdir(paths.build.static.dir, callback);
     } else {
         return callback();
     }
@@ -708,22 +709,22 @@ var acknowledgeBowerModuleTask = function (name) {
 
 // Create copy tasks for each non-development dependencies
 // Also create tasks to add their license contents to the licenses file
-for (name in pkg.dependencies) {
-    var copyTaskName = `copy-module-${name}`;
-    acknowledgeTaskName = `acknowledge-module-${name}`;
-    gulp.task(copyTaskName, copyModuleTask(name));
-    gulp.task(acknowledgeTaskName, ['acknowledge-clear', 'acknowledge-starmade'], acknowledgeModuleTask(name));
-    copyTasks.push(copyTaskName);
-    acknowledgeTasks.push(acknowledgeTaskName);
-}
+// for (name in pkg.dependencies) {
+//     var copyTaskName = `copy-module-${name}`;
+//     acknowledgeTaskName = `acknowledge-module-${name}`;
+//     gulp.task(copyTaskName, copyModuleTask(name));
+//     gulp.task(acknowledgeTaskName, ['acknowledge-clear', 'acknowledge-starmade'], acknowledgeModuleTask(name));
+//     copyTasks.push(copyTaskName);
+//     acknowledgeTasks.push(acknowledgeTaskName);
+// }
 
 // Create tasks for each Bower dependency to add their license contents to the
 // licenses file
-for (name in bower.dependencies) {
-    acknowledgeTaskName = `acknowledge-bower-module-${name}`;
-    gulp.task(acknowledgeTaskName, ['acknowledge-clear', 'acknowledge-starmade'], acknowledgeBowerModuleTask(name));
-    acknowledgeTasks.push(acknowledgeTaskName);
-}
+// for (name in bower.dependencies) {
+//     acknowledgeTaskName = `acknowledge-bower-module-${name}`;
+//     gulp.task(acknowledgeTaskName, ['acknowledge-clear', 'acknowledge-starmade'], acknowledgeBowerModuleTask(name));
+//     acknowledgeTasks.push(acknowledgeTaskName);
+// }
 
 gulp.task('copy', copyTasks);
 gulp.task('acknowledge', acknowledgeTasks);
