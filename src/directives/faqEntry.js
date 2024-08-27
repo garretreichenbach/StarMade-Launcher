@@ -8,17 +8,17 @@
 const app = angular.module('launcher');
 
 app.directive('faqEntry', () => ({
-  restrict: 'E',
-  replace: true,
-  transclude: true,
-  templateUrl: 'templates/faqEntry.html',
+	restrict: 'E',
+	replace: true,
+	transclude: true,
+	templateUrl: 'templates/faqEntry.html',
 
-  scope: {
-    question: '@',
-    note: '@'
-  },
+	scope: {
+		question: '@',
+		note: '@'
+	},
 
-  link(scope) {
-    return scope.expanded = false;
-  }
+	link(scope) {
+		return scope.expanded = false;
+	}
 }));

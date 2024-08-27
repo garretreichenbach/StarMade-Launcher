@@ -1,7 +1,0 @@
-.popup(ng-show='opened')
-  .popup-overlay(ng-click='close()')
-  .popup-container
-    .popup-header(ng-class="{notification: type == 'notification', settings: type == 'settings', tooltip: type == 'tooltip'}")
-      | {{title}}
-      a.popup-close(ng-click='close()')
-    .popup-body(ng-transclude)

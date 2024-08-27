@@ -1,0 +1,20 @@
+<ul class="council-links">
+    <li>
+        <external-link href="http://starmadedock.net/council/">What is the Council?</external-link>
+    </li>
+    <li>
+        <external-link href="http://council.star-made.org/">Who is in the Council?</external-link>
+    </li>
+    <li>
+        <external-link href="http://starmadedock.net/forums/cir/">Council Forum</external-link>
+    </li>
+</ul>
+<ul class="news council-news">
+    <li ng-repeat="entry in news">
+        <div class="banner no-banner" ng-hide="!entry.title">
+            <h2 class="title">{{entry.title}}</h2><span class="date">{{entry.created_at | ordinalDate}}</span>
+        </div>
+        <news-body ng-bind-html="entry.body"></news-body>
+    </li>
+</ul>
+<div class="council-side"><img alt="Council of Intergalactic Representatives" src="images/council/council_logo.png"/></div>

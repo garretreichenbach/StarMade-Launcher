@@ -8,25 +8,25 @@
 const app = angular.module('launcher');
 
 app.directive('progressBar', () => ({
-  restrict: 'E',
-  replace: true,
-  transclude: true,
-  templateUrl: 'templates/progressBar.html',
+	restrict: 'E',
+	replace: true,
+	transclude: true,
+	templateUrl: 'templates/progressBar.html',
 
-  scope: {
-    curValue: '@curValue',
-    maxValue: '@maxValue'
-  },
+	scope: {
+		curValue: '@curValue',
+		maxValue: '@maxValue'
+	},
 
-  link(scope, element) {
-    const updatePercent = function() {
-      scope.percent = (scope.curValue / scope.maxValue) * 100.0;
-      return scope.width = 208.0 * (scope.percent / 100.0);
-    };
+	link(scope, element) {
+		const updatePercent = function () {
+			scope.percent = (scope.curValue / scope.maxValue) * 100.0;
+			return scope.width = 208.0 * (scope.percent / 100.0);
+		};
 
-    scope.$watch('curValue', updatePercent);
-    scope.$watch('maxValue', updatePercent);
+		scope.$watch('curValue', updatePercent);
+		scope.$watch('maxValue', updatePercent);
 
-    return updatePercent();
-  }
+		return updatePercent();
+	}
 }));

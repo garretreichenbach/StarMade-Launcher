@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>StarMade</title>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,700" rel="stylesheet">
+    <link href="styles/main.css" rel="stylesheet">
+    <script src="auth.js"></script>
+</head>
+<body class="auth"><img alt="StarMade" class="logo" src="images/auth/header.png"><a id="close"><img alt="Close" src="images/main/close_icon.png"></a>
+<form id="uplink">
+    <ul class="tabs">
+        <li class="uplinkTab"><span>Login and Play</span></li>
+        <li class="guestTab"><a id="guestLink">Play as Guest</a></li>
+    </ul>
+    <div class="fields">
+        <label for="username">Username</label>
+        <input id="username" name="username" type="text"><br>
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password">
+        <div id="status"></div>
+    </div>
+    <a id="uplinkSubmit"><span class="hidden">
+          <button type="submit">Login</button></span></a>
+    <div id="uplinkSubmitCover"></div>
+    <div class="options">
+        <label id="rememberMeLabel">Remember this account </label><a id="rememberMe">&nbsp;</a>
+        <div class="clearfix"></div>
+        <ul>
+            <li><a class="external" href="https://registry.star-made.org/users/password/new">Forgotten Password</a><a id="registerLink">Register</a></li>
+        </ul>
+    </div>
+</form>
+<form id="guest" style="display: none;">
+    <ul class="tabs">
+        <li class="uplinkTab"><a id="uplinkLink">Login and Play</a></li>
+        <li class="guestTab"><span>Play as Guest</span></li>
+    </ul>
+    <div class="fields">
+        <label for="playerName">Player Name</label>
+        <input id="playerName" name="playerName" type="text">
+        <div id="statusGuest" style="text-align: center; color: red"></div>
+        <p>
+            Playing as a guest will let you play in local games and on
+            guest-enabled multiplayer servers without having to login. However
+            some options will be disabled.
+        </p>
+    </div>
+    <a id="guestSubmit"><span class="hidden">
+          <button type="submit">Play as Guest</button></span></a>
+    <div id="guestSubmitLeftCover"></div>
+    <div id="guestSubmitRightCover"></div>
+</form>
+<form id="register" style="display: none;"><a id="registerBack"><img alt="Back" src="images/auth/back_icon.png"></a>
+    <ul class="tabs">
+        <li class="registerTab"><span>Register New Account</span></li>
+    </ul>
+    <div class="fields">
+        <label for="username">Username</label>
+        <input id="registerUsername" name="username" type="text"><br>
+        <label for="email">Email</label>
+        <input id="registerEmail" name="email" type="email"><br>
+        <label for="password">Password</label>
+        <input id="registerPassword" name="password" type="password">
+        <label id="subscribeLabel">Subscribe to our official StarMade newsletter</label><a id="subscribe">&#10003;</a>
+        <div id="registerStatus"></div>
+    </div>
+    <div id="registerSubmitBg"></div>
+    <a id="registerSubmit"><span class="hidden">
+          <button type="submit">Register New Account</button></span></a>
+    <div class="options"><a class="external" href="https://registry.star-made.org/users/confirmation/new">Didn't receive confirmation instructions?</a></div>
+</form>
+<footer>
+    <ul class="links">
+        <li><a id="licensesLink">Licenses</a></li>
+        <li><a class="external" href="http://star-made.org/terms_and_conditions">Terms of Service</a></li>
+    </ul>
+    <span>&copy; Schine GmbH</span>
+</footer>
+</body>
+</html>

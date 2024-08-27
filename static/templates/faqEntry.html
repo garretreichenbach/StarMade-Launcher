@@ -1,0 +1,4 @@
+<li>
+    <h2 ng-click="expanded = !expanded"><span style="color: gray">{{note}} </span>{{question}}<span class="toggle" ng-class="{collapsed: !expanded, expanded: expanded}"></span></h2>
+    <p ng-show="expanded" ng-transclude="ng-transclude"></p>
+</li>

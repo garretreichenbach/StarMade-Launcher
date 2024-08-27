@@ -6,18 +6,18 @@
 'use strict';
 
 const {
-  remote
+	remote
 } = require('electron');
 
 const app = angular.module('launcher');
 
 app.directive('minimizeButton', () => ({
-  restrict: 'E',
-  replace: true,
-  template: '<a ng-click="minimize()" ng-transclude></a>',
-  transclude: true,
+	restrict: 'E',
+	replace: true,
+	template: '<a ng-click="minimize()" ng-transclude></a>',
+	transclude: true,
 
-  link(scope) {
-    return scope.minimize = () => remote.getCurrentWindow().minimize();
-  }
+	link(scope) {
+		return scope.minimize = () => remote.getCurrentWindow().minimize();
+	}
 }));

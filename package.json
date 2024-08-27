@@ -24,7 +24,6 @@
 		"gulp-filter": "^2.0.2",
 		"gulp-git": "^1.2.4",
 		"gulp-gunzip": "0.0.3",
-		"gulp-jade": "^1.0.0",
 		"gulp-less": "^3.0.3",
 		"gulp-load-plugins": "^0.10.0",
 		"gulp-sourcemaps": "^1.5.2",

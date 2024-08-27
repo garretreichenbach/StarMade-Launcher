@@ -8,52 +8,54 @@
 const electron = require('electron');
 
 const {
-  remote
+	remote
 } = electron;
 const {
-  shell
+	shell
 } = electron;
 
 const {
-  dialog
+	dialog
 } = remote;
 
 const app = angular.module('launcher');
 
 app.directive('externalLink', () => ({
-  restrict: 'E',
-  replace: true,
+	restrict: 'E',
+	replace: true,
 
-  scope: {
-    href: '@href',
-    thirdPartyWarning: '=thirdPartyWarning'
-  },
+	scope: {
+		href: '@href',
+		thirdPartyWarning: '=thirdPartyWarning'
+	},
 
-  template: '<a ng-click="openExternal($event)" ng-transclude></a>',
-  transclude: true,
+	template: '<a ng-click="openExternal($event)" ng-transclude></a>',
+	transclude: true,
 
-  link(scope, element) {
-    element.removeAttr('href');
+	link(scope, element) {
+		element.removeAttr('href');
 
-    return scope.openExternal = function(event) {
-      event.preventDefault();
+		return scope.openExternal = function (event) {
+			event.preventDefault();
 
-      if (scope.thirdPartyWarning) {
-        return dialog.showMessageBox({
-          type: 'info',
-          buttons: [
-            'OK',
-            'Cancel'
-          ],
-          title: 'Third Party Website',
-          message: 'You are about to visit a third party website. Schine GmbH does not take any responsibility for any content on third party sites.'
-        },
-          function(response) {
-            if (response === 0) { return shell.openExternal(scope.href); }
-        });
-      } else {
-        return shell.openExternal(scope.href);
-      }
-    };
-  }
+			if (scope.thirdPartyWarning) {
+				return dialog.showMessageBox({
+						type: 'info',
+						buttons: [
+							'OK',
+							'Cancel'
+						],
+						title: 'Third Party Website',
+						message: 'You are about to visit a third party website. Schine GmbH does not take any responsibility for any content on third party sites.'
+					},
+					function (response) {
+						if (response === 0) {
+							return shell.openExternal(scope.href);
+						}
+					});
+			} else {
+				return shell.openExternal(scope.href);
+			}
+		};
+	}
 }));

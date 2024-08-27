@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head><title>Getting Started</title>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,700" rel="stylesheet">
+    <link href="styles/main.css" rel="stylesheet">
+    <script src="getting_started.js"></script>
+</head>
+<body class="getting_started">
+<div class="header"><img alt="StarMade" class="logo" src="images/getting_started/GS_logo.png"><img alt="Schine" class="schine-logo" src="images/getting_started/schine_logo.png"><a id="close"><img
+        alt="Close" src="images/main/close_icon.png"></a></div>
+<div class="step" id="step0">
+    <div class="content">
+        <pre id="licenses"></pre>
+        <div id="acceptBg"></div>
+        <a id="accept"><span class="hidden">Accept</span></a>
+        <div id="declineBg"></div>
+        <a id="decline"><span class="hidden">Decline</span></a></div>
+</div>
+<div class="step" id="step1">
+    <div class="side"></div>
+    <div class="content"><h1>Install directory</h1>
+        <p>Please select where you would like to install the game. It will be be installed in a StarMade subdirectory in the location you choose.</p><span class="hidden" id="blank_path">You must specify an install directory.</span><input
+                id="installPath" name="installPath" placeholder="install directory" type="text">
+        <button id="installBrowse">Browse</button>
+        <span class="hidden" id="linux_info">On Linux you must select, not open, the folder you want in the dialog.</span>
+        <div id="installContinueBg"></div>
+        <a id="installContinue"><span class="hidden">Continue</span></a></div>
+</div>
+<div class="step" id="step2">
+    <div class="side"></div>
+    <div class="content"><h1>Welcome to StarMade</h1>
+        <p>StarMade is a 3D voxel sandbox space shooter where players can
+            explore the universe, create and fly space ships, build space
+            stations, mine and craft resources, colonize planets, form
+            alliances, fight for territories, and more.</p>
+        <p>In this procedurally-generated universe of StarMade, you're only
+            limited by your imagination. Play on your own or with friends and
+            journey into the new frontier.</p><a id="next"><span class="hidden">Continue</span></a>
+        <div id="nextCoverTop"></div>
+        <div id="nextCoverRight"></div>
+        <div id="nextCoverBottom"></div>
+        <div id="nextCoverLeft"></div>
+    </div>
+</div>
+<div class="step" id="step3">
+    <div class="side"></div>
+    <div class="content"><h1>Join our Citizen Registry</h1>
+        <p>Create a free Citizen account to manage all your skins, settings,
+            and blueprints in one place. Connect in with the global StarMade
+            community, share creations and ideas, and more.</p>
+        <p>If you already have a Citizen account then click
+            <span class="reference">Login</span>.</p>
+        <p>If you don't wish to create one at this time, click
+            <span class="reference">Skip</span>. You will always be able to
+            create one later by clicking <span class="reference">Register</span>
+            in the launcher.</p>
+        <div id="loginBg"></div>
+        <a id="login"><span class="hidden">Login</span></a>
+        <div id="createAccountBg"></div>
+        <a id="createAccount"><span class="hidden">Create Account</span></a>
+        <div id="skipBg"></div>
+        <a id="skip"><span class="hidden">Skip</span></a></div>
+</div>
+<div class="step" id="step4">
+    <div class="side"></div>
+    <div class="content"><h1>Link Steam Account?</h1>
+        <p>Your Registry account currently isn't linked to a Steam account.
+            You can link your purchased StarMade game to your Steam account
+            letting you play with friends and gain access to all the features
+            of Steam while playing StarMade.</p>
+        <p>You can link your Registry account to the currently logged in Steam
+            account on your computer by clicking the button below.</p>
+        <div id="linkBg"></div>
+        <a id="link"><span class="hidden">Link to Steam Account</span></a>
+        <div id="skipOnceBg"></div>
+        <a id="skipOnce"><span class="hidden">Skip Once</span></a><a id="skipAlways">Skip and don't ask again</a></div>
+</div>
+<div class="step" id="updating">
+    <div class="side"></div>
+    <div class="content"><h1>Launcher updating</h1>
+        <p>Please wait, the launcher is updating...</p></div>
+</div>
+<div class="step" id="changelog">
+    <div class="side"></div>
+    <div class="content">
+        <div id="log"><br><br>
+            <h1>Changelog</h1>
+            <h2 id="3_0_0">v3.0.0</h2>
+            <table>
+                <tr>
+                    <td class="update"></td>
+                    <td>
+                        <h3>Major Update</h3>
+                        <ul>Conveted all CoffeScript code to JavaScript for easier maintainabiltiy.</ul>
+                        <ul>Converted all Jade code to HTML for easier maintainability.</ul>
+                        <ul>The Launcher now supports automatic Java version switching from Java 8 to Java 18.</ul>
+                        <ul>Game versions prior to the Universe Update (< 0.3.000) will now automatically switch to Java 8 instead of Java 7 for increased performance.</ul>
+                        <ul>Game versions after the Universe Update (>= 0.3.000) will now automatically switch to Java 18.</ul>
+                    </td>
+                </tr>
+            </table>
+            <h2 id="2_1_3">v2.1.3</h2>
+            <table>
+                <tr>
+                    <td class="update"></td>
+                    <td>The launcher now uses <span class="code">javaw.exe</span> to launch the game on Windows. This should help mitigate issues with the recent buggy nVidia graphics driver. (version
+                        378.49, released on January 24th, 2017)
+                    </td>
+                </tr>
+            </table>
+            <h2 id="2_1_2">v2.1.2</h2>
+            <table>
+                <tr>
+                    <td class="bugfix"></td>
+                    <td>Fixed displaying of Citizen Broadcasts. This will allow us to display important messages and notifications. Note that these messages are only displayed once, so be sure to read
+                        them.
+                    </td>
+                </tr>
+            </table>
+            <h2 id="2_1_1">v2.1.1</h2>
+            <table>
+                <tr>
+                    <td class="feature"></td>
+                    <td>Added changelog</td>
+                </tr>
+                <tr>
+                    <td class="feature"></td>
+                    <td>Added backup dialog, which optionally creates a compressed copy of the game configs, worlds, and blueprints prior to updating. Support for both <span class="code">.zip</span>
+                        and <span class="code">.tar.gz</span> formats.
+                    </td>
+                </tr>
+                <tr>
+                    <td class="feature"></td>
+                    <td>Launcher now reads the game version from its <span class="code">version.txt</span>; this allows the launcher to detect Steam updates, and also (unofficially) supports
+                        concurrent game versions. We will add official support in a later update.
+                    </td>
+                </tr>
+                <tr>
+                    <td class="feature"></td>
+                    <td>Added custom java options field to the launcher options dialog.</td>
+                </tr>
+                <tr>
+                    <td class="feature"></td>
+                    <td>Added validation to memory settings window</td>
+                </tr>
+                <tr>
+                    <td class="feature"></td>
+                    <td>Added validation to guest logins</td>
+                </tr>
+                <tr>
+                    <td class="bugfix"></td>
+                    <td>Fixed selecting custom Java paths</td>
+                </tr>
+                <tr>
+                    <td class="bugfix"></td>
+                    <td>Fixed news post scrubbing. There should no longer be missing sections.</td>
+                </tr>
+                <tr>
+                    <td class="update"></td>
+                    <td>Improved <span class="code">--help</span> and added version information.</td>
+                </tr>
+                <tr>
+                    <td class="update"></td>
+                    <td>Numerous backend improvements, including a rewrite of memory settings handling and updates to logging.</td>
+                </tr>
+            </table>
+        </div>
+        <a id="closeChangelogBg"></a><a id="closeChangelog"><span class="hidden">Close</span></a></div>
+</div>
+<footer>
+    <ul class="links" id="footerLinks">
+        <li><a id="licensesLink">Licenses</a></li>
+        <li><a class="external" href="http://star-made.org/terms_and_conditions">Terms of Service</a></li>
+    </ul>
+    <span>&copy; Schine GmbH 2024</span></footer>
+</body>
+</html>

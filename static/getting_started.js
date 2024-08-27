@@ -1,7 +1,7 @@
 'use strict';
 
 window.onload = function () {
-  var path = require('path');
+	var path = require('path');
 
-  require(path.resolve(__dirname, '..', 'lib', 'getting_started'));
+	require(path.resolve(__dirname, '..', 'lib', 'getting_started'));
 };

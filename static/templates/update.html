@@ -1,0 +1,15 @@
+<form>
+    <select ng-model="branch">
+        <option value="pre">PRE</option>
+        <option value="dev">DEV</option>
+        <option value="release">RELEASE</option>
+        <option value="archive">ARCHIVE</option>
+    </select>
+    <select ng-model="selectedVersion">
+        <option ng-repeat="version in versions" value="{{$index}}">{{version.build}} v{{version.version}} ({{branch | uppercase}})</option>
+    </select>
+    <input ng-model="installDir"/>
+    <button ng-click="update()">Update</button>
+    <button ng-click="launch()" ng-controller="LaunchCtrl">Launch</button>
+</form>
+<p ng-if="!versions">There are no versions on this branch.</p>

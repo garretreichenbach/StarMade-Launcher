@@ -1,0 +1,19 @@
+<ul class="side" ng-show="sidebarEntries.length &gt; 0">
+    <li ng-repeat="entry in sidebarEntries" ng-style="{'background': 'url({{entry.launcher_news_sidebar_entry.image_url}})'}">
+        <external-link href="{{entry.launcher_news_sidebar_entry.url}}"></external-link>
+    </li>
+    <!-- Placeholders for when the content is still loading-->
+</ul>
+<ul class="side" ng-hide="sidebarEntries.length &gt; 0">
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+<ul class="news">
+    <li ng-repeat="entry in news">
+        <div class="banner" ng-class="{'no-banner': !entry.banner}" ng-hide="!entry.title">
+            <h2 class="title">{{entry.title}}</h2><span class="date">{{entry.created_at | ordinalDate}}</span>
+        </div>
+        <news-body ng-bind-html="entry.body"></news-body>
+    </li>
+</ul>

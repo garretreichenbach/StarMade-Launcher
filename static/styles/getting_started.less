@@ -28,24 +28,24 @@ body.getting_started {
   }
 
 
-    select, input {
-      background-color: #191F29;
-      border: 2px solid #30303C;
-      color: #FFFFFF;
-      font-family: 'Ubuntu';
-      font-size: 12px;
-      padding: 5px;
-    }
+  select, input {
+    background-color: #191F29;
+    border: 2px solid #30303C;
+    color: #FFFFFF;
+    font-family: 'Ubuntu';
+    font-size: 12px;
+    padding: 5px;
+  }
 
-    button {
-      background-color: #30303C;
-      border: 0;
-      color: #FFFFFF;
-      font-family: 'Ubuntu';
-      font-size: 12px;
-      padding: 5px 8px;
-      text-transform: uppercase;
-    }
+  button {
+    background-color: #30303C;
+    border: 0;
+    color: #FFFFFF;
+    font-family: 'Ubuntu';
+    font-size: 12px;
+    padding: 5px 8px;
+    text-transform: uppercase;
+  }
 
   div.step {
     background-color: #0F0F13;
@@ -186,8 +186,7 @@ body.getting_started {
         }
 
 
-
-      div#installContinueBg {
+        div#installContinueBg {
           position: absolute;
           top: 338px;
           left: 0;
@@ -209,7 +208,7 @@ body.getting_started {
           width: 108px;
           height: 37px;
           bottom: 60px;
-          left:   25px;
+          left: 25px;
           z-index: 1;
         }
 
@@ -369,7 +368,6 @@ body.getting_started {
     }
 
 
-
     &#step4 {
       display: none;
 
@@ -448,7 +446,6 @@ body.getting_started {
     }
 
 
-
     &#changelog {
       display: none;
 
@@ -458,16 +455,16 @@ body.getting_started {
 
       div.content {
         a#closeChangelogBg {
-          position:          absolute;
-          top:               338px;
-          left:              0;
-          width:             200px;
-          height:            166px;
-          background-image:  url(../images/getting_started/continue_btn.png);
+          position: absolute;
+          top: 338px;
+          left: 0;
+          width: 200px;
+          height: 166px;
+          background-image: url(../images/getting_started/continue_btn.png);
           background-repeat: no-repeat;
-          cursor:            default;
-          z-index:           0;
-          transition:        0.3s;
+          cursor: default;
+          z-index: 0;
+          transition: 0.3s;
 
 
           &.hover {
@@ -477,11 +474,11 @@ body.getting_started {
 
         a#closeChangelog {
           position: absolute;
-          top:      404px;
-          left:      24px;
-          width:    111px;
-          height:    42px;
-          z-index:    1;
+          top: 404px;
+          left: 24px;
+          width: 111px;
+          height: 42px;
+          z-index: 1;
         }
 
         div#log {
@@ -497,17 +494,33 @@ body.getting_started {
             margin-bottom: 0;
           }
 
-          tr:nth-child(odd)  td:last-child { color: #888; }
-          tr:nth-child(even) td:last-child { color: #aaa; }
+          tr:nth-child(odd) td:last-child {
+            color: #888;
+          }
+
+          tr:nth-child(even) td:last-child {
+            color: #aaa;
+          }
 
           // Tags
           tr td:first-child {
             display: inline-block;
             padding: 0 0.5em 0 0;
 
-            &.feature::after { color: lightgreen;  content: "Feature"; }
-            &.update::after  { color: orange;      content: "Update";  }
-            &.bugfix::after  { color: cyan;        content: "Bugfix";  }
+            &.feature::after {
+              color: lightgreen;
+              content: "Feature";
+            }
+
+            &.update::after {
+              color: orange;
+              content: "Update";
+            }
+
+            &.bugfix::after {
+              color: cyan;
+              content: "Bugfix";
+            }
 
             // &::after {
             //   padding:       0.1em 0.25em;
@@ -518,9 +531,9 @@ body.getting_started {
           }
 
           span.code {
-            padding:          0.1em 0.2em;
-            font-family:      monospace;
-            color:            cyan;
+            padding: 0.1em 0.2em;
+            font-family: monospace;
+            color: cyan;
             background-color: rgba(200, 200, 255, 0.1);
           }
 
@@ -541,7 +554,7 @@ body.getting_started {
   }
 
   ::-webkit-scrollbar,
-  ::-webkit-scrollbar-track,  {
+  ::-webkit-scrollbar-track, {
     background-color: transparent;
     -webkit-box-shadow: none;
   }

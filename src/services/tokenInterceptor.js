@@ -8,12 +8,14 @@
 const app = angular.module('launcher');
 
 app.factory('tokenInterceptor', (accessToken, apiConfig) => ({
-  request(config) {
-    if (config.url.indexOf(`//${apiConfig.baseUrl}` === 0)) {
-      const token = accessToken.get();
-      if (token) { config.headers.Authorization = 'Bearer ' + token; }
-    }
+	request(config) {
+		if (config.url.indexOf(`//${apiConfig.baseUrl}` === 0)) {
+			const token = accessToken.get();
+			if (token) {
+				config.headers.Authorization = 'Bearer ' + token;
+			}
+		}
 
-    return config;
-  }
+		return config;
+	}
 }));

@@ -7,13 +7,13 @@
 
 const app = angular.module('launcher');
 
-app.filter('ordinalDate', $filter => (function(input) {
-  const year = $filter('date')(new Date(input), 'yyyy');
-  const month = $filter('date')(new Date(input), 'MMM');
-  const day = new Date(input).getDate();
+app.filter('ordinalDate', $filter => (function (input) {
+	const year = $filter('date')(new Date(input), 'yyyy');
+	const month = $filter('date')(new Date(input), 'MMM');
+	const day = new Date(input).getDate();
 
-  const ordinals = ['th', 'st', 'nd', 'rd'];
-  const ordinal = (ordinals[(day - 20) % 10] || ordinals[day] || ordinals[0]);
+	const ordinals = ['th', 'st', 'nd', 'rd'];
+	const ordinal = (ordinals[(day - 20) % 10] || ordinals[day] || ordinals[0]);
 
-  return `${month} ${day}${ordinal} ${year}`;
+	return `${month} ${day}${ordinal} ${year}`;
 }));

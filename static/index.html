@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html ng-app="launcher">
+<head>
+    <title>Launcher</title>
+    <!-- bower:css-->
+    <!-- endbower-->
+    <link href="styles/main.css" rel="stylesheet">
+    <script src="index.js"></script>
+    <!-- bower:js-->
+    <script src="../bower_components/x2js/xml2json.min.js"></script>
+    <script src="../bower_components/angular-xml/angular-xml.js"></script>
+    <!-- endbower-->
+</head>
+<body>
+<div class="container"><img alt="StarMade" class="logo" src="images/main/logo.png">
+    <div class="top"><img alt="Schine" class="schine-logo" src="images/main/launcher_schine_logo.png">
+        <ul class="window-controls">
+            <li>
+                <minimize-button><img alt="Minimize" src="images/main/minimize_icon.png"></minimize-button>
+            </li>
+            <li>
+                <close-button><img alt="Close" src="images/main/close_icon.png"></close-button>
+            </li>
+        </ul>
+        <ul class="nav">
+            <li><a ui-sref="news">News</a></li>
+            <li><a ui-sref="council">Council</a></li>
+            <li><a ui-sref="support">Support</a></li>
+        </ul>
+        <ul class="nav nav-right">
+            <li><a ng-click="launcherOptionsWindow = true"><span class="nav-options-gear"></span><span class="nav-options-gear hover"></span>Options</a></li>
+        </ul>
+    </div>
+    <div class="content" ui-view></div>
+    <div ng-controller="CitizenBroadcastCtrl">
+        <popup class="broadcast" opened="unread" title="Citizen Broadcast" type="notification">
+            <div class="message" ng-bind-html="message"></div>
+        </popup>
+    </div>
+    <div class="footer" ng-controller="UpdateCtrl">
+        <popup opened="buildTypeTooltip" title="Build Type" type="tooltip">
+            <p>
+                Build Types are different branches of the game. For the most
+                stable version of the game choose our Release build type.<br>If you want to be on the forefront of every new addition we add
+                then choose our Dev build type.
+            </p>
+            <p>
+                Be aware Dev builds are more unstable and often can change several
+                times in the space of hours so are probably not the best choice
+                for a server to be running.
+            </p>
+        </popup>
+        <popup opened="buildVersionTooltip" title="Build Version" type="tooltip">
+            <p>Build Versions are different versions of the game.</p>
+        </popup>
+        <popup opened="serverPortTooltip" title="Server Port" type="tooltip">
+            <p>Server Port is the port the dedicated server will listen on.</p>
+        </popup>
+        <div class="pane" ng-class="{play: onPlayTab, dedicated: onDedicatedTab}">
+            <ul class="tabs">
+                <li><a ng-click="showPlayTab()">Play StarMade</a></li>
+                <li><a ng-click="showDedicatedTab()">Dedicated Server</a></li>
+            </ul>
+            <form>
+                <div class="field-group">
+                    <label for="buildType">Build Type<sup ng-click="buildTypeTooltip = true"><img alt="" src="images/main/launch_tooltip_icon.png"></sup></label><br>
+                    <select id="buildType" ng-disabled="updaterProgress.inProgress || switchingBranch" ng-model="branch">
+                        <option value="release">Release (recommended)</option>
+                        <option value="dev">Dev</option>
+                        <option value="pre">Pre</option>
+                        <option value="archive">Archive</option>
+                    </select><a class="gear" ng-click="openOptions('buildType')">&nbsp;</a>
+                </div>
+                <popup class="build-type-popup" opened="buildTypeOptions" title="Build Type Options" type="settings">
+                    <div class="field-group">
+                        <label for="popupBuildType">Build Type</label><br>
+                        <select id="popupBuildType" ng-disabled="updaterProgress.inProgress || switchingBranch" ng-model="popupData.branch">
+                            <option value="release">Release (recommended)</option>
+                            <option value="dev">Dev</option>
+                            <option value="pre">Pre</option>
+                            <option value="archive">Archive</option>
+                        </select>
+                    </div>
+                    <div class="field-group">
+                        <label for="popupInstallDir">Installation Directory<span class="error" ng-show="!!popupData.installDir_error">{{popupData.installDir_error}}</span></label><br>
+                        <input class="wide" ng-disabled="updaterProgress.inProgress || switchingBranch" ng-model="popupData.installDir">
+                        <button ng-click="browseInstallDir()" ng-disabled="updaterProgress.inProgress || switchingBranch">Browse</button>
+                    </div>
+                    <div class="field-group">
+                        <button ng-click="popupBuildTypeSave()" ng-disabled="updaterProgress.inProgress || switchingBranch">Save</button>
+                        <button ng-click="closeOptions('buildType')">Cancel</button>
+                    </div>
+                </popup>
+                <div class="field-group">
+                    <label for="buildVersion">Build Version<sup ng-click="buildVersionTooltip = true"><img alt="" src="images/main/launch_tooltip_icon.png"></sup></label><br>
+                    <select id="buildVersion" ng-disabled="updaterProgress.inProgress || switchingBranch" ng-model="selectedVersion">
+                        <option ng-repeat="version in versions" value="{{$index}}">v{{version.version}}{{version.hotfix}} {{version.latest}}</option>
+                    </select><a class="gear" ng-click="openOptions('buildVersion')">&nbsp;</a>
+                </div>
+                <popup class="build-version-popup" opened="buildVersionOptions" title="Build Version Options" type="settings">
+                    <div class="field-group">
+                        <label for="popupBuildVersion">Build Version</label><br>
+                        <select id="popupBuildVersion" ng-disabled="updaterProgress.inProgress || switchingBranch" ng-model="popupData.selectedVersion">
+                            <option ng-repeat="version in versions" value="{{$index}}">v{{version.version}}{{version.hotfix}} {{version.latest}}</option>
+                        </select>
+                        <button ng-click="selectNewestVersion()" ng-disabled="updaterProgress.inProgress || switchingBranch">Select Newest</button>
+                        <button ng-click="selectLastUsedVersion()" ng-disabled="updaterProgress.inProgress || switchingBranch">Select Last Used</button>
+                    </div>
+                    <div class="field-group download-options">
+                        <label>Download Options</label><br>
+                        <button ng-click="pre_update()" ng-disabled="updaterProgress.inProgress || switchingBranch">Download Selected Build Version</button>
+                        <span class="description">
+                  Repair current download or quickly switch to another Build
+                  Version</span>
+                        <button ng-click="pre_update(true)" ng-disabled="updaterProgress.inProgress || switchingBranch || popupData.deleting">Force Download All &amp; Overwrite</button>
+                        <span class="description">Force re-download and replace of every file (takes longer)</span>
+                        <label>Currently Installed:</label><br><span class="description">version: {{lastUsedVersionHotfix}}<br>build:  {{lastVersion}}</span>
+                    </div>
+                </popup>
+                <div class="field-group" ng-controller="LaunchCtrl" ng-show="onDedicatedTab">
+                    <label for="serverPort">Server Port<sup ng-click="$parent.serverPortTooltip = true"><img alt="" src="images/main/launch_tooltip_icon.png"></sup></label><br>
+                    <input id="serverPort" ng-model="serverPort">
+                </div>
+            </form>
+        </div>
+        <div class="status">{{status}}<br><span ng-hide:"updaterProgress.inProgress>{{status_updateWarning}}</span></div>
+        <div class="update-bg" ng-class="{hover: updateHover}" ng-show="updaterProgress.needsUpdating &amp;&amp; !updaterProgress.inProgress"></div>
+        <a class="update" ng-click="pre_update()" ng-mouseenter="updateMouseEnter()" ng-mouseleave="updateMouseLeave()"></a>
+        <progress-bar cur-value="{{updaterProgress.curValue}}" max-value="{{updaterProgress.maxValue}}" ng-show="updaterProgress.inProgress"></progress-bar>
+        <div class="backupDialog">
+            <popup opened="backupDialog.visible" title="Backup" type="settings">
+                <div ng-show="!backupDialog.error.visible &amp;&amp; !backupDialog.progress.visible">
+                    <form class="side-by-side initial"><b class="bright">Would you like to perform a backup prior to updating?</b>
+                        <p>This will preserve your game data in the unlikely event of something going wrong. The backup will be stored in the backups folder within your game directory.</p><br>Please
+                        select what you would like backed up, and the archive format:
+                        <div class="field-group block">
+                            <input class="toggle" id="zip" name="compressionType" ng-checked="backupOptions.compressionType == 'zip'" ng-click="set_zip_compression()" type="radio">
+                            <label for="zip">.zip</label>
+                            <input class="toggle" id="targz" name="compressionType" ng-checked="backupOptions.compressionType == 'targz'" ng-click="set_targz_compression()" type="radio">
+                            <label for="targz">.tar.gz</label>
+                        </div>
+                        <div class="backupOptions field-group block">
+                            <input ng-model="backupOptions.configs" type="checkbox"><span>Include Configs</span><br>
+                            <input ng-model="backupOptions.worlds" type="checkbox"><span>Include Worlds</span><br>
+                            <input ng-model="backupOptions.blueprints" type="checkbox"><span>Include Blueprints</span><br>
+                        </div>
+                        <div class="field-group block">
+                            <div class="right">
+                                <button ng-click="closeBackupDialog()">Cancel</button>
+                            </div>
+                            <div class="left">
+                                <button ng-click="backup()" ng-disabled="!(backupOptions.configs || backupOptions.worlds || backupOptions.blueprints)">Yes</button>
+                                <button ng-click="update()">No</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div ng-show="backupDialog.progress.visible &amp;&amp; !backupDialog.error.visible">
+                    <form class="side-by-side progress"><b>Backing up your game data</b>
+                        <ul>
+                            <li ng-show="backupDialog.progress.configs">Configs ...<span ng-show="backupDialog.progress.configs=='complete'">done</span><span
+                                    ng-show="backupDialog.progress.configs=='skipped'">skipped</span><span ng-show="backupDialog.progress.configs=='missing'">not present</span></li>
+                            <li ng-show="backupDialog.progress.worlds">Worlds ...<span ng-show="backupDialog.progress.worlds=='complete'">done</span><span
+                                    ng-show="backupDialog.progress.worlds=='skipped'">skipped</span><span ng-show="backupDialog.progress.worlds=='missing'">not present</span></li>
+                            <li ng-show="backupDialog.progress.blueprints">Blueprints ...<span ng-show="backupDialog.progress.blueprints=='complete'">done</span><span
+                                    ng-show="backupDialog.progress.blueprints=='skipped'">skipped</span><span ng-show="backupDialog.progress.blueprints=='missing'">not present</span></li>
+                        </ul>
+                        <br>
+                        <div ng-show=" backupDialog.progress.complete">
+                            <p ng-show=" backupDialog.skipped">Backup Skipped!</p>
+                            <p ng-show="!backupDialog.skipped">Complete.<span ng-show="backupDialog.path">Your backup is located here:</span>
+                                <textarea id="backupPath" readonly>{{backupDialog.path}}</textarea>
+                            </p>
+                        </div>
+                        <br><span class="right" ng-show="backupDialog.progress.complete" style="size: 14px">Click update to continue</span>
+                        <div class="field-group block">
+                            <div>
+                                <button class="right" ng-click="update()" ng-show="backupDialog.progress.complete">Update</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div ng-show="backupDialog.error.visible">
+                    <form class="side-by-side error">
+                        <p>An error occured during the backup<span ng-show="backupDialog.error.detailsSection"> of<span class="highlight">{{backupDialog.error.detailsSection}}</span></span>.<br>Details
+                            follow:</p>
+                        <textarea readonly>{{backupDialog.error.details || "No details available"}}</textarea>
+                        <div class="field-group block">
+                            <div class="right">
+                                <button ng-click="backup()">Retry</button>
+                                <button ng-click="closeBackupDialog()">Cancel</button>
+                            </div>
+                            <div class="left">
+                                <button ng-click="update()">Update anyway</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </popup>
+        </div>
+        <div ng-controller="LaunchCtrl">
+            <div class="envJavaOptionsWarning">
+                <popup opened="_java_options.show_dialog" title="Warning" type="notification">
+                    <form class="side-by-side">
+                        <p>Found the<span class="code">_JAVA_OPTIONS</span> environment variable on your system. The options it contains forcibly overwrite those used by every java app on your system,
+                            including StarMade.</p>
+                        <p class="severe">In many cases this will cause undesired behavior, including preventing the game from launching if it specifies too small of memory values.</p><br
+                            class="clearfix">
+                        <p>We recommend clearing this value, but you may keep it or alter it below.</p><br class="clearfix">
+                        <div class="field-group block right">
+                            <input id="edit_java_options" name="edit_java_options" ng-model="_java_options.modified">
+                        </div>
+                        <p class="warning">To change its value permanently, you must do so outside of the launcher.</p><br class="clearfix">
+                        <div class="field-group block">
+                            <div class="right">
+                                <button ng-click="saveEnvJavaOptionsWarning()" ng-disabled="_java_options.modified == get_java_options()">Update value</button>
+                                <button ng-click="closeEnvJavaOptionsWarning()">Close</button>
+                            </div>
+                            <div class="left">
+                                <button ng-click="clearEnvJavaOptions()">Clear and continue</button>
+                            </div>
+                        </div>
+                    </form>
+                </popup>
+            </div>
+            <div class="clientMemoryOptions">
+                <popup opened="clientMemoryOptions" title="Client Memory Settings" type="settings">
+                    <p>
+                        The recommended memory for StarMade is 4096mb.
+                        Smaller values will work, but may significantly reduce gameplay quality.
+                    </p>
+                    <form class="side-by-side">
+                        <div class="field-group primary">
+                            <label for="maxMemory">Maximum Memory (MB):</label>
+                            <input class="slider-group" id="maxMemoryInput" max="{{memory.ceiling}}" min="{{memory.floor}}" name="maxMemoryInput" ng-change="set_memory_slider_value(memory.max)" ng-class="memory.validate.max.class()" ng-model="memory.max"
+                                   step="{{memory.step}}" string-to-number type="number">
+                            <input class="wide slider-group" id="maxMemorySlider" max="{{memory.ceiling}}" min="{{memory.floor}}" name="maxMemorySlider" ng-change="snap_memory(memory.slider)" ng-class="memory.validate.max.class()"
+                                   ng-model="memory.slider" string-to-number type="range"><br>
+                            <label class="right critically_low_memory_warning" ng-show="memory.max &lt; 2048">Insufficient memory. The game will very likely encounter problems.</label>
+                            <label class="right low_memory_warning" ng-show="memory.max &gt;= 2048 &amp;&amp; memory.max &lt; 4096">Less than 4096mb is not recommended, and may cause issues.</label>
+                            <label class="right non-power-of-2" ng-show="!memory.power_of_2 &amp;&amp; memory.max &gt;= 4096">Some Java versions require max memory to be a power of 2</label>
+                            <label class="right power-of-2" ng-show="memory.power_of_2 &amp;&amp; memory.max &gt;= 4096">Max memory is a power of 2</label>
+                        </div>
+                        <br class="clearfix">
+                        <hr ng-hide="launcherOptions.showAdvancedMemory">
+                        <a href="#" name="__advClick" ng-click="launcherOptions.showAdvancedMemory = true" ng-hide="launcherOptions.showAdvancedMemory">Show advanced options</a>
+                        <div class="advanced-memory" ng-show="launcherOptions.showAdvancedMemory">
+                            <div class="field-group">
+                                <label for="initialMemory">Initial Memory (MB):</label><br>
+                                <input id="initialMemory" min="64" name="initialMemory" ng-class="memory.validate.initial.class()" ng-model="memory.initial" type="number">
+                            </div>
+                            <div class="field-group">
+                                <label for="earlyGenMemory">Early Gen Memory:</label><br>
+                                <input id="earlyGenMemory" min="64" name="earlyGenMemory" ng-class="memory.validate.earlyGen.class()" ng-model="memory.earlyGen" type="number">
+                            </div>
+                            <br class="clearfix">
+                            <label class="critically_low_memory_warning" ng-hide="memory.validate.earlyGen() &amp;&amp; memory.validate.initial()">Values must be at least 64mb<br></label>
+                            <label class="critically_low_memory_warning" ng-show="memory.earlyGen &gt;= memory.initial">Initial memory<i>must</i>be larger than earlyGen.<br></label>
+                            <label class="low_memory_warning" ng-show="(memory.initial &lt; 256) || !memory.validate.initial()">Note: Setting initial memory below 256mb may cause problems</label>
+                        </div>
+                        <div class="field-group block right">
+                            <button ng-click="saveClientOptions()" ng-disabled="!memory.validate()">Save</button>
+                            <button ng-click="closeClientOptions()">Cancel</button>
+                        </div>
+                    </form>
+                </popup>
+            </div>
+            <a class="gear gear-memory" ng-click="openClientMemoryOptions()">&nbsp;</a>
+            <div class="launch-bg" ng-class="{hover: launchHover}" ng-hide="updaterProgress.needsUpdating || updaterProgress.inProgress"></div>
+            <a class="launch" ng-click="launch(onDedicatedTab)" ng-controller="LaunchCtrl" ng-hide="updaterProgress.inProgress || updaterProgress.needsUpdating"
+               ng-mouseenter="launchMouseEnter()" ng-mouseleave="launchMouseLeave()"></a>
+        </div>
+    </div>
+</div>
+<popup class="launcher-options-popup" opened="launcherOptionsWindow" title="Launcher Options" type="settings">
+    <form class="popup-body">
+        <div class="field-group launcher-options">
+            <label>Launcher Settings</label><br>
+            <button ng-click="switchUser()">Switch User</button>
+            <span class="description">You are currently logged in as:<br><span class="highlight">{{playerName}}</span></span><br>
+            <button ng-click="showChangelog()">Show Changelog</button>
+            <span class="description">Launcher<span class="highlight">v{{version}}</span>installed<br>(build<span class="highlight">{{buildHash}}</span>)</span><br>
+            <button ng-click="openDownloadPage()">Launcher Download Page</button>
+            <span class="description"></span>
+        </div>
+        <div class="field-group launcher-options" ng-hide="!steamLaunch" ng-if="currentUser">
+            <label>Steam Settings</label><br>
+            <button ng-click="openSteamLink()" ng-if="!steamAccountLinked">Link Registry Account to Steam</button>
+            <button ng-disabled="true" ng-if="steamAccountLinked">Registry Account Linked to Steam</button>
+        </div>
+        <div class="field-group launcher-options" ng-controller="LaunchCtrl">
+            <label>Java Settings</label><br>
+            <input ng-blur="setJavaArgs()" ng-model="launcherOptions.javaArgs" type="text"><span class="description">These options are passed to Java, along with memory settings, etc.</span><br>
+            <button ng-click="resetJavaArgs()">Reset to Default</button>
+            <span class="description"></span><br>
+            <input ng-blur="verifyJavaPath()" ng-model="launcherOptions.javaPath" type="text"><span class="description">
+            Enter a custom java path, or leave
+            blank to use the bundled version.</span>
+            <button ng-click="launcherOptions.javaPathBrowse()">Browse</button>
+            <br><span class="description error" ng-show="launcherOptions.invalidJavaPath">There is no java executable in the specified path.</span><span class="description status"
+                                                                                                                                                         ng-hide="launcherOptions.invalidJavaPath">{{launcherOptions.javaPathStatus}}</span>
+        </div>
+    </form>
+</popup>
+</body>
+</html>
