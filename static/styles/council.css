@@ -1,24 +1,19 @@
 ul.council-links {
-  .links;
-
   left: 149px;
 }
-
 ul.council-news {
-  .content(280px, 58px, 5px) !important;
+  width: 280px !important;
+  height: 58px !important;
+  padding: 5px !important;
 }
-
 div.council-side {
   float: right;
   text-align: center;
   width: 208px;
-
-  img {
-    width: 155px;
-  }
 }
-
-// Styles for StarMade Dock elements
+div.council-side img {
+  width: 155px;
+}
 a.setFavicon {
   background-repeat: no-repeat;
   padding: 0;
@@ -28,11 +23,9 @@ a.setFavicon {
   background-position: left center;
   padding-left: 18px;
 }
-
 .avatar img {
   border-radius: 100%;
 }
-
 .inTextMiniMe img {
   margin-right: 2px;
   margin-bottom: -2px;

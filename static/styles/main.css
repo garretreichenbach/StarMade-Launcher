@@ -1,0 +1,785 @@
+@import 'fonts.css';
+@import 'slider.css';
+@import 'auth.css';
+@import 'community.css';
+@import 'council.css';
+@import 'getting_started.css';
+@import 'news.css';
+@import 'popup.css';
+@import 'progressBar.css';
+@import 'support.css';
+@import 'update.css';
+@import 'citizenBroadcast.css';
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    background-color: #100F14;
+    color: #A1A6AC;
+    font-family: 'Ubuntu', Arial, sans-serif;
+    font-size: 14px;
+    margin: 0;
+}
+
+a {
+    cursor: pointer;
+    color: #207583;
+    text-decoration: none;
+    -o-transition: .3s;
+    -ms-transition: .3s;
+    -moz-transition: .3s;
+    -webkit-transition: .3s;
+    transition: .3s;
+}
+
+a:hover,
+a:focus {
+    text-decoration: none;
+}
+
+a:hover {
+    color: #449675;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: 'Ubuntu', Arial, sans-serif;
+}
+
+h1 {
+    font-size: 50px;
+    color: #FFF;
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: 70px;
+}
+
+h2 {
+    font-size: 30px;
+    color: #227b86;
+    font-weight: bold;
+    line-height: 48px;
+}
+
+h3 {
+    font-size: 25px;
+    color: #FFF;
+    line-height: 36px;
+}
+
+h4 {
+    font-size: 20px;
+    color: #227b86;
+    line-height: 32px;
+}
+
+h5,
+h6 {
+    font-size: 14px;
+    color: #FFF;
+    line-height: 20px;
+}
+
+h5 {
+    text-transform: uppercase;
+}
+
+p {
+    margin-bottom: 16px;
+}
+
+hr {
+    height: 0;
+    margin: 20px 0;
+    background: transparent;
+    border: 0;
+    border-bottom: 2px dashed rgba(255, 255, 255, 0.1);
+}
+
+pre {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 8px;
+    color: #EFEFEF;
+}
+
+code {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 0 2px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px #101016;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px #7A8087;
+    background-color: #9CA1A7;
+}
+
+::-webkit-scrollbar,
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-corner {
+    background-color: #0E0E13;
+}
+
+.right {
+    float: right !important;
+}
+
+.clearfix {
+    clear: both;
+}
+
+div.backupDialog .field-group.backupOptions {
+    margin-left: 1.5em !important;
+    margin-bottom: 1em !important;
+}
+
+div.backupDialog .field-group.backupOptions input[type="checkbox"] {
+    width: auto !important;
+}
+
+div.backupDialog input#backupPath {
+    margin-top: 0.5em;
+    font-size: 75%;
+}
+
+div.backupDialog textarea {
+    width: 100%;
+    min-height: 2.5em;
+    max-height: 10em;
+    outline-color: #1f7282;
+    /* chrome */
+    resize: vertical;
+    font-size: 80%;
+}
+
+div.backupDialog form.side-by-side.progress textarea {
+    min-height: 2.5em;
+    max-height: 6em;
+}
+
+div.backupDialog form.side-by-side.error textarea {
+    min-height: 5em;
+    max-height: 10em;
+}
+
+/* Radio toggle buttons (tested with 2, not 3+) */
+input[type="radio"].toggle {
+    display: none;
+}
+
+input[type="radio"].toggle + label {
+    width: 6em !important;
+    padding: 0.25em 0.5em;
+    border: 1px solid #1c2431;
+    text-align: center;
+    background: linear-gradient(to top, #202a3a, #191F29);
+    color: #666;
+}
+
+input[type="radio"].toggle + label:first-of-type {
+    border-top-left-radius: 1em;
+    border-bottom-left-radius: 1em;
+}
+
+input[type="radio"].toggle + label:last-of-type {
+    border-top-right-radius: 1em;
+    border-bottom-right-radius: 1em;
+}
+
+input[type="radio"].toggle:checked + label {
+    border-color: #345;
+    background: linear-gradient(to bottom, #3a4454, #252540);
+    color: white;
+}
+
+input[type="radio"].toggle:nth-of-type(n+2) + label {
+    margin-left: -3px;
+}
+
+div.backupDialog .field-group,
+div.envJavaOptionsWarning .field-group {
+    margin: 0.5em 0 0 0 !important;
+}
+
+div.backupDialog .field-group.block,
+div.envJavaOptionsWarning .field-group.block {
+    display: block;
+    width: 100%;
+}
+
+div.backupDialog .field-group.right,
+div.envJavaOptionsWarning .field-group.right {
+    float: right;
+}
+
+div.backupDialog .highlight,
+div.envJavaOptionsWarning .highlight {
+    color: darkcyan;
+}
+
+div.backupDialog button,
+div.envJavaOptionsWarning button {
+    margin: 0.25em;
+}
+
+div.envJavaOptionsWarning p {
+    padding: 0;
+    margin: 0.5em 0 0 0;
+}
+
+div.envJavaOptionsWarning p,
+div.envJavaOptionsWarning span {
+    text-align: justify;
+}
+
+div.envJavaOptionsWarning input#edit_java_options {
+    width: 100%;
+    color: cyan;
+    margin-bottom: 0.25em;
+}
+
+div.envJavaOptionsWarning .severe {
+    color: orangered;
+}
+
+div.envJavaOptionsWarning .warning {
+    color: orange;
+}
+
+div.clientMemoryOptions label.right {
+    text-align: right;
+}
+
+div.clientMemoryOptions label.power-of-2 {
+    color: #00542f;
+}
+
+div.clientMemoryOptions label.non-power-of-2 {
+    color: #075465;
+}
+
+div.clientMemoryOptions label.low_memory_warning {
+    color: orange;
+}
+
+div.clientMemoryOptions label.critically_low_memory_warning {
+    color: red;
+}
+
+div.clientMemoryOptions input[type="number"] {
+    outline-color: #075465;
+}
+
+div.clientMemoryOptions input[type="number"].invalid,
+div.clientMemoryOptions input[type="number"].critical {
+    color: red;
+    border-color: #622;
+    outline-color: firebrick;
+}
+
+div.clientMemoryOptions input[type="number"].warning {
+    color: orange;
+    border-color: #640;
+    outline-color: orange;
+}
+
+div.clientMemoryOptions .field-group input.slider-group {
+    float: left;
+    height: 2.5em;
+    text-align: center;
+}
+
+div.clientMemoryOptions .field-group input.slider-group.wide {
+    width: 80% !important;
+}
+
+div.clientMemoryOptions .field-group input[type="number"].slider-group {
+    width: 6em !important;
+}
+
+div.clientMemoryOptions .field-group input[type="range"].slider-group {
+    height: 2em !important;
+}
+
+div.clientMemoryOptions hr {
+    margin-bottom: 3px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+form {
+    margin-top: 10px;
+}
+
+form div.advanced-memory .field-group {
+    margin-top: 16px !important;
+}
+
+form div.advanced-memory .field-group:first {
+    margin-left: 0px !important;
+    background-color: cyan !important;
+}
+
+form .field-group {
+    float: left;
+    margin-left: 16px;
+}
+
+form .field-group.block {
+    clear: both;
+}
+
+form .field-group.primary {
+    width: 100%;
+    clear: both;
+    margin-bottom: 16px;
+}
+
+form .field-group.primary label {
+    display: block;
+    width: 100% !important;
+}
+
+form label {
+    color: #A1A6Ac;
+    font-size: 12px;
+    font-family: 'Ubuntu';
+}
+
+form label sup {
+    cursor: pointer;
+    margin-left: 4px;
+}
+
+form select,
+form input,
+form textarea {
+    background-color: #191F29;
+    border: 2px solid #30303C;
+    color: #FFFFFF;
+    font-family: 'Ubuntu';
+    font-size: 12px;
+    padding: 5px;
+}
+
+form select.wide,
+form input.wide,
+form textarea.wide {
+    width: 70%;
+}
+
+form select.inline-slider,
+form input.inline-slider,
+form textarea.inline-slider {
+    float: left;
+    height: 2.5em;
+}
+
+form input {
+    width: 80px;
+}
+
+form button {
+    background-color: #30303C;
+    border: 0;
+    color: #FFFFFF;
+    font-family: 'Ubuntu';
+    font-size: 12px;
+    padding: 5px 8px;
+    text-transform: uppercase;
+}
+
+:disabled {
+    color: #666666 !important;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.container img.logo {
+    left: 21px;
+    position: absolute;
+    z-index: 1;
+    -webkit-app-region: drag;
+}
+
+.container .top {
+    background-image: url(../images/main/header_top.png);
+    color: #FFFFFF;
+    height: 99px;
+    margin-bottom: 4px;
+    overflow: hidden;
+    position: relative;
+    width: 800px;
+    -webkit-app-region: drag;
+}
+
+.container .top img.schine-logo {
+    position: absolute;
+    right: 54px;
+    top: 10px;
+}
+
+.container .top ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.container .top ul li {
+    float: left;
+}
+
+.container .top ul.window-controls {
+    position: absolute;
+    right: 8px;
+    top: 6px;
+}
+
+.container .top ul.window-controls li {
+    padding: 0;
+    -webkit-app-region: no-drag;
+}
+
+.container .top ul.window-controls li:not(:last-child) {
+    padding-right: 8px;
+}
+
+.container .top ul.nav {
+    bottom: 5px;
+    left: 170px;
+    position: absolute;
+}
+
+.container .top ul.nav.nav-right {
+    left: auto;
+    right: 0;
+}
+
+.container .top ul.nav li a {
+    color: #1F758E;
+    cursor: pointer;
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 12px 20px;
+    text-transform: uppercase;
+    -webkit-app-region: no-drag;
+}
+
+.container .top ul.nav li a span.nav-options-gear {
+    background-image: url(../images/main/nav_options_gear_btn.png);
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    float: left;
+    height: 20px;
+    margin-top: -3px;
+    margin-right: 4px;
+    transition: opacity .3s;
+    width: 20px;
+}
+
+.container .top ul.nav li a span.nav-options-gear.hover {
+    background-position: -20px 0;
+    margin-left: -24px;
+    opacity: 0;
+}
+
+.container .top ul.nav li a.active,
+.container .top ul.nav li a:hover {
+    background-color: #121526;
+    color: #FFFFFF;
+}
+
+.container .top ul.nav li a.active span.nav-options-gear.hover,
+.container .top ul.nav li a:hover span.nav-options-gear.hover {
+    opacity: 1;
+    transition: opacity .3s;
+}
+
+.container .content {
+    height: 340px;
+    padding: 2px 5px;
+    position: relative;
+    overflow: auto;
+    width: 100%;
+}
+
+.container .content iframe,
+.container .content img {
+    max-width: 100%;
+}
+
+.container .content.no-footer {
+    height: calc(100% - 74px);
+}
+
+.container .footer {
+    background-color: #16151B;
+    bottom: 0;
+    height: 107px;
+    position: static;
+    width: 100%;
+}
+
+.container .footer a.player {
+    float: right;
+}
+
+.container .footer a.gear {
+    background-image: url(../images/main/launch_options_gear.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    display: inline-block;
+    height: 17px;
+    margin-left: 5px;
+    width: 18px;
+}
+
+.container .footer a.gear.gear-memory {
+    bottom: 30px;
+    height: 24px;
+    position: absolute;
+    right: 242px;
+    width: 23px;
+    background-image: url(../images/main/memory_options_gear.png);
+    z-index: 1;
+}
+
+.container .footer ul.tabs {
+    font-size: 11px;
+    list-style: none;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+}
+
+.container .footer ul.tabs li {
+    float: left;
+    padding: 7px 0 9px 22px;
+    width: 127px;
+}
+
+.container .footer ul.tabs li a {
+    color: #A1A6AC;
+    cursor: pointer;
+}
+
+.container .footer div.play {
+    background-image: url(../images/main/footer_normalplay_bg.jpg);
+    overflow: hidden;
+}
+
+.container .footer div.dedicated {
+    background-image: url(../images/main/footer_dedicated_bg.jpg);
+    overflow: hidden;
+}
+
+.container .footer div.status {
+    bottom: 75px;
+    color: #A1A6AC;
+    font-family: 'Ubuntu';
+    font-size: 10px;
+    line-height: 1.2;
+    height: 31px;
+    padding-top: 4px;
+    position: absolute;
+    right: 16px;
+    text-align: center;
+    width: 217px;
+}
+
+.container .footer div.update-bg {
+    background-image: url(../images/main/update_btn.png);
+    bottom: 0;
+    position: absolute;
+    right: 0;
+    height: 108px;
+    transition: .3s;
+    width: 300px;
+}
+
+.container .footer div.update-bg.hover {
+    background-image: url(../images/main/update_roll.png);
+}
+
+.container .footer a.update {
+    bottom: 13px;
+    height: 61px;
+    position: absolute;
+    right: 17px;
+    width: 214px;
+}
+
+.container .footer div.launch-bg {
+    background-image: url(../images/main/launch_btn.png);
+    bottom: 0;
+    position: absolute;
+    right: 0;
+    height: 108px;
+    transition: .3s;
+    width: 300px;
+}
+
+.container .footer div.launch-bg.hover {
+    background-image: url(../images/main/launch_roll.png);
+}
+
+.container .footer a.launch {
+    bottom: 13px;
+    height: 61px;
+    position: absolute;
+    right: 17px;
+    width: 214px;
+}
+
+.hidden {
+    height: 1px;
+    left: -10000px;
+    overflow: hidden;
+    position: absolute;
+    top: auto;
+    width: 1px;
+}
+
+.clearfix {
+    clear: both;
+}
+
+span.code {
+    padding: 0.2em;
+    font-family: courier, monospace;
+    color: cyan;
+    background-color: rgba(200, 200, 255, 0.1);
+}
+
+footer {
+    bottom: 4px;
+    color: #666666;
+    font-size: 10px;
+    padding: 13px 16px 16px;
+    position: absolute;
+    z-index: 1;
+}
+
+footer span {
+    float: left;
+}
+
+footer ul.links {
+    float: right;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+footer ul.links li {
+    float: left;
+}
+
+footer ul.links li:not(:last-child) {
+    margin-right: 4px;
+}
+
+footer ul.links li a {
+    color: #666666;
+}
+
+footer ul.links li a:hover {
+    color: #FFFFFF;
+}
+
+div.launcher-options-popup form {
+    margin-top: 0;
+}
+
+div.launcher-options-popup div.popup-container {
+    top: 21% !important;
+}
+
+div.launcher-options-popup div.popup-body div.field-group.launcher-options {
+    overflow: hidden;
+}
+
+div.launcher-options-popup div.popup-body div.field-group.launcher-options input {
+    float: left;
+    width: 231px;
+    font-size: 75%;
+}
+
+div.launcher-options-popup div.popup-body div.field-group.launcher-options button {
+    cursor: pointer;
+    float: left;
+    margin-left: 0 !important;
+    width: 231px;
+    white-space: nowrap;
+}
+
+div.launcher-options-popup div.popup-body div.field-group.launcher-options span.highlight {
+    color: white;
+}
+
+div.launcher-options-popup div.popup-body div.field-group.launcher-options span.description {
+    display: block;
+    float: left;
+    font-size: 10px;
+    margin-left: 8px;
+    width: 158px;
+    line-height: 110%;
+}
+
+div.launcher-options-popup div.popup-body div.field-group.launcher-options span.description.status {
+    margin-top: 0.5em;
+    color: #1f7282;
+}
+
+div.launcher-options-popup div.popup-body div.field-group.launcher-options span.description.error {
+    color: #c80a0a;
+}
+
+div.launcher-options-popup div.popup-body div.field-group.launcher-options span.description:not(:last-child) {
+    height: 29px;
+}
+
+ul.side {
+    float: left;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+ul.side li {
+    background-color: #15151A;
+    border: 1px solid #393942;
+    height: 108px;
+    width: 200px;
+}
+
+ul.side li a {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+ul.side li:not(:last-child) {
+    margin-bottom: 6px;
+}

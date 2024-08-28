@@ -420,7 +420,11 @@
 			resizable: false,
 			show: false,
 			width: 650,
-			height: height
+			height: height,
+			webPreferences: {
+				nodeIntegration: true,
+				contextIsolation: false,
+			}
 		});
 		gettingStartedWindow.steamLaunch = !!argv.steam;
 		if (args != null) gettingStartedWindow.loadURL("file://" + staticDir + "/getting_started.html?" + args);
@@ -459,7 +463,7 @@
 	app.on('ready', function () {
 		log.event("App ready", log.levels.verbose);
 		clearTimeout(loadFailure);
-		return openGettingStartedWindow();//.show(); If I don't call this, nothing ever appears... but then the UI breaks?
+		return openGettingStartedWindow().show();
 	});
 
 	app.on('before-quit', function () {

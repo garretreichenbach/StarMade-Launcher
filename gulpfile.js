@@ -1,9 +1,3 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/main/docs/suggestions.md
- */
 'use strict';
 
 let acknowledgeTaskName, arch, name, platform, taskName;
@@ -125,7 +119,10 @@ const paths = {
 			glob: 'static/**/*.html'
 		},
 		styles: {
-			main: 'static/styles/main.less'
+			glob: 'static/styles/*.css'
+		},
+		mixins: {
+			glob: 'static/styles/mixins.less'
 		}
 	},
 	steamAppid: 'steam_appid.txt'
@@ -294,7 +291,7 @@ gulp.task('default', ['run']);
 gulp.task('bootstrap', [/*'greenworks',*/ 'java']);
 
 // gulp.task('build', ['build-hash', 'js', 'jade', 'less', 'copy', 'acknowledge']);
-gulp.task('build', ['build-hash', 'js', 'html', 'less', 'copy', 'acknowledge']);
+gulp.task('build', ['build-hash', 'js', 'html', 'mixins', 'css', 'copy', 'acknowledge']);
 
 gulp.task('build-hash', function () {
 	build_hash = cp.execSync('git rev-parse --short HEAD', {encoding: 'utf8'}).trim();
@@ -379,7 +376,10 @@ gulp.task('html', () => gulp.src(paths.static.html.glob)
 	.pipe(wiredep())
 	.pipe(gulp.dest(paths.build.static.dir)));
 
-gulp.task('less', () => gulp.src(paths.static.styles.main)
+gulp.task('css', () => gulp.src(paths.static.styles.glob)
+	.pipe(gulp.dest(paths.build.static.styles.dir)));
+
+gulp.task('mixins', () => gulp.src(paths.static.mixins.glob)
 	.pipe(plugins.less())
 	.pipe(gulp.dest(paths.build.static.styles.dir)));
 
@@ -922,7 +922,7 @@ gulp.task('package-steam-appid', ['electron-packager'], () => gulp.src(paths.ste
 	.pipe(gulp.dest(paths.dist.platform.linux.x64))
 	.pipe(gulp.dest(paths.dist.platform.darwin.x64)));
 
-gulp.task('bruh', function() {
+gulp.task('bruh', function () {
 	//run C:\Users\garre\OneDrive\Documents\GitHub\StarMade-Launcher\build\lib\browser\main.js
 	return spawn('node', [path.join(paths.build.lib.dir, 'browser', 'main.js')], {
 		stdio: 'inherit'
