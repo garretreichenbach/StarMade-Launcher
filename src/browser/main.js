@@ -7,6 +7,9 @@
 	argv = (process.argv.slice(1));
 
 	path = require('path');
+	argv.debugging = true;
+	argv.verbose = true;
+
 
 	process.argv.slice(1).forEach(function (arg, index) {
 		if (arg === '-archive') {
@@ -456,7 +459,7 @@
 	app.on('ready', function () {
 		log.event("App ready", log.levels.verbose);
 		clearTimeout(loadFailure);
-		return openGettingStartedWindow().show();
+		return openGettingStartedWindow();//.show(); If I don't call this, nothing ever appears... but then the UI breaks?
 	});
 
 	app.on('before-quit', function () {

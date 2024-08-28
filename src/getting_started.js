@@ -7,10 +7,10 @@ const electron = require('electron');
 const ipc = electron.ipcRenderer;
 const {
 	remote
-} = electron;
+} = electron.app;
 const {
 	shell
-} = electron;
+} = electron.app;
 
 const pkg = require(path.join(path.dirname(__dirname), 'package.json'));
 const util = require('./util');
@@ -19,14 +19,10 @@ const log = require('./log-helpers');
 const {
 	dialog
 } = remote;
-const electronApp = remote.app;
+const electronApp = remote;
 
 
 log.event("Beginning initial setup");
-
-const {
-	steamLaunch
-} = remote.getCurrentWindow();
 
 const close = document.getElementById('close');
 const footerLinks = document.getElementById('footerLinks');
@@ -55,12 +51,10 @@ const showLicenses = function () {
 	return footerLinks.style.display = 'none';
 };
 
-
 const showUpdating = function () {
 	step0.style.display = 'none';
 	return updating.style.display = 'block';
 };
-
 
 const determineInstallDirectory = function () {
 	// Try to automatically determine the correct install path
@@ -118,7 +112,7 @@ const determineInstallDirectory = function () {
 const acceptEula = function () {
 	log.entry("Accepted EULA");
 
-	localStorage.setItem('acceptedEula', true);
+	localStorage.setItem('acceptedEula', 'true');
 	close.style.display = 'inline';
 	footerLinks.style.display = 'block';
 
@@ -154,6 +148,7 @@ close.addEventListener('click', function () {
 	return remote.app.quit();
 });
 
+localStorage.setItem('acceptedEula', true);
 // console.log("[Root]")  ##~
 // console.log(" | localStorage: #{JSON.stringify(localStorage)}")  ##~
 if ((localStorage.getItem('gotStarted') == null) && (localStorage.getItem('acceptedEula') != null)) {
@@ -162,7 +157,7 @@ if ((localStorage.getItem('gotStarted') == null) && (localStorage.getItem('accep
 	localStorage.removeItem('acceptedEula');
 }
 // This also prevents a race condition between a) showing the window and b) updating the install directory textbox
-// -- The events required to solve this race condition [getCurrentWindow.on('show' / 'ready-to-show')] currently do not fire.
+// -- The events required to solve this race condition [getFocusedWindow.on('show' / 'ready-to-show')] currently do not fire.
 
 
 log.verbose(`Getting Started window.location.href: ${window.location.href}`);
@@ -171,18 +166,18 @@ if (localStorage.getItem('gotStarted') != null) {
 	log.debug("Already got started");
 	if (window.location.href.split('?')[1] === 'licenses') {
 		showLicenses();
-		remote.getCurrentWindow().show();
+		remote.getFocusedWindow().show();
 	} else if (window.location.href.split('?')[1] === 'steam') {
 		currentStep = 4;
 		step0.style.display = 'none';
 		step4.style.display = 'block';
 		footerLinks.style.display = 'block';
 		log.event("Initial Setup: Step 4 (Steam)");
-		remote.getCurrentWindow().show();
+		remote.getFocusedWindow().show();
 	} else if (window.location.href.split('?')[1] === 'updating') {
 		showUpdating();
 		ipc.send('updating-opened');
-		remote.getCurrentWindow().show();
+		remote.getFocusedWindow().show();
 	} else {
 		// Show changelog, if needed.
 		if (localStorage.getItem("presented-changelog") === pkg.version) {
@@ -195,7 +190,7 @@ if (localStorage.getItem('gotStarted') != null) {
 		step0.style.display = 'none';
 		changelog.style.display = 'block';
 		localStorage.setItem("presented-changelog", pkg.version);
-		remote.getCurrentWindow().show();
+		remote.getFocusedWindow().show();
 	}
 } else {
 	// Fresh install; bypass changelog.
@@ -209,7 +204,7 @@ if (localStorage.getItem('gotStarted') != null) {
 	if (localStorage.getItem('acceptedEula') != null) {
 		acceptEula();
 	}
-	remote.getCurrentWindow().show();
+	remote.getFocusedWindow().show();
 }
 
 util.setupExternalLinks();
@@ -228,6 +223,7 @@ const declineBg = document.getElementById('declineBg');
 
 fs.readFile(path.join(path.dirname(__dirname), 'static', 'licenses.txt'), function (err, data) {
 	if (err) {
+		console.log(err)
 		log.warning('Unable to open licenses.txt');
 		acceptEula();
 	}
@@ -271,7 +267,7 @@ installContinue.addEventListener('mouseenter', () => installContinueBg.className
 
 installContinue.addEventListener('mouseleave', () => installContinueBg.className = '');
 
-installBrowse.addEventListener('click', () => dialog.showOpenDialog(remote.getCurrentWindow(), {
+installBrowse.addEventListener('click', () => dialog.showOpenDialog(remote.getFocusedWindow(), {
 		title: 'Select Installation Directory',
 		properties: ['openDirectory'],
 		defaultPath: installPath.value

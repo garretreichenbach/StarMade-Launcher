@@ -13,6 +13,7 @@
 		"graceful-fs": "^4.2.11"
 	},
 	"devDependencies": {
+		"electron": "^32.0.1",
 		"electron-packager": "^17.1.2",
 		"electron-prebuilt": "1.4.13",
 		"electron-rebuild": "^3.2.9",

@@ -922,6 +922,13 @@ gulp.task('package-steam-appid', ['electron-packager'], () => gulp.src(paths.ste
 	.pipe(gulp.dest(paths.dist.platform.linux.x64))
 	.pipe(gulp.dest(paths.dist.platform.darwin.x64)));
 
+gulp.task('bruh', function() {
+	//run C:\Users\garre\OneDrive\Documents\GitHub\StarMade-Launcher\build\lib\browser\main.js
+	return spawn('node', [path.join(paths.build.lib.dir, 'browser', 'main.js')], {
+		stdio: 'inherit'
+	});
+});
+
 gulp.task('run', function () {
 	let app;
 	const appDir = paths.dist.platform[process.platform][process.arch];

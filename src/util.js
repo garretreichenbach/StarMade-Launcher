@@ -1,11 +1,4 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/main/docs/suggestions.md
- */
 'use strict';
-
 exports.setupExternalLinks = function () {
 	const {
 		shell
@@ -21,11 +14,7 @@ exports.setupExternalLinks = function () {
 };
 
 exports.parseBoolean = function (str) {
-	if (str === 'true') {
-		return true;
-	} else {
-		return false;
-	}
+	return str === 'true';
 };
 
 exports.getJreDirectory = function (javaVersion, platform) {
@@ -36,7 +25,7 @@ exports.getJreDirectory = function (javaVersion, platform) {
 	}
 	let jreDirectory = `jre${javaVersion}`;
 	if (platform === 'darwin') {
-		return jreDirectory += '.jre/Contents/Home';
+		return jreDirectory + '.jre/Contents/Home';
 	} else {
 		return jreDirectory;
 	}
