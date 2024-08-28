@@ -1,0 +1,854 @@
+@import 'fonts.less';
+@import 'slider.less';
+
+@contentBackground: #15151A;
+@contentBorder: #393942;
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background-color: #100F14;
+  color: #A1A6AC;
+  font-family: 'Ubuntu', Arial, sans-serif;
+  font-size: 14px;
+  margin: 0;
+}
+
+a {
+  cursor: pointer;
+  color: #207583;
+  text-decoration: none;
+  -o-transition: .3s;
+  -ms-transition: .3s;
+  -moz-transition: .3s;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+a:hover, a:focus {
+  text-decoration: none;
+}
+
+a:hover {
+  color: #449675;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'Ubuntu', Arial, sans-serif;
+}
+
+h1 {
+  font-size: 50px;
+  color: #FFF;
+  font-weight: bold;
+  text-transform: uppercase;
+  line-height: 70px;
+}
+
+h2 {
+  font-size: 30px;
+  color: #227b86;
+  font-weight: bold;
+  line-height: 48px;
+}
+
+h3 {
+  font-size: 25px;
+  color: #FFF;
+  line-height: 36px;
+}
+
+h4 {
+  font-size: 20px;
+  color: #227b86;
+  line-height: 32px;
+}
+
+h5, h6 {
+  font-size: 14px;
+  color: #FFF;
+  line-height: 20px;
+}
+
+h5 {
+  text-transform: uppercase;
+}
+
+p {
+  margin-bottom: 16px;
+}
+
+hr {
+  height: 0;
+  margin: 20px 0;
+  background: transparent;
+  border: 0;
+  border-bottom: 2px dashed rgba(255, 255, 255, .1);
+}
+
+pre {
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 8px;
+  color: #EFEFEF;
+}
+
+code {
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 0 2px;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px #101016;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px #7A8087;
+  background-color: #9CA1A7;
+}
+
+::-webkit-scrollbar,
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-corner {
+  background-color: #0E0E13;
+}
+
+
+.right {
+  float: right !important;
+}
+
+.clearfix {
+  clear: both;
+}
+
+div.backupDialog {
+  .field-group {
+    &.backupOptions {
+      margin-left: 1.5em !important;
+      margin-bottom: 1em !important;
+
+      input[type="checkbox"] {
+        width: auto !important;
+      }
+    }
+  }
+
+  input#backupPath {
+    margin-top: 0.5em;
+    font-size: 75%;
+  }
+
+  textarea {
+    width: 100%;
+    min-height: 2.5em;
+    max-height: 10em;
+    outline-color: #1f7282; /* chrome */
+    resize: vertical;
+    font-size: 80%;
+  }
+
+  form.side-by-side {
+    &.progress textarea {
+      min-height: 2.5em;
+      max-height: 6em;
+    }
+
+    &.error textarea {
+      min-height: 5em;
+      max-height: 10em;
+    }
+  }
+}
+
+
+/* Radio toggle buttons (tested with 2, not 3+) */
+input[type="radio"].toggle {
+  display: none;
+}
+
+input[type="radio"].toggle + label {
+  width: 6em !important; // Override `form input` fixed-width
+  padding: 0.25em 0.5em;
+  border: 1px solid #1c2431;
+  text-align: center;
+  background: linear-gradient(to top, #202a3a, #191F29);
+  color: #666;
+
+  &:first-of-type {
+    border-top-left-radius: 1em;
+    border-bottom-left-radius: 1em;
+  }
+
+  &:last-of-type {
+    border-top-right-radius: 1em;
+    border-bottom-right-radius: 1em;
+  }
+}
+
+input[type="radio"].toggle:checked + label {
+  border-color: #345;
+  background: linear-gradient(to bottom, #3a4454, #252540);
+  color: white; // #1f7282
+}
+
+input[type="radio"].toggle:nth-of-type(n+2) + label {
+  margin-left: -3px;
+}
+
+
+div.backupDialog, div.envJavaOptionsWarning {
+  .field-group {
+    margin: 0.5em 0 0 0 !important;
+
+    &.block {
+      display: block;
+      width: 100%;
+    }
+
+    &.right {
+      float: right;
+    }
+  }
+
+  .highlight {
+    color: darkcyan;
+  }
+
+  button {
+    margin: 0.25em;
+  }
+}
+
+div.envJavaOptionsWarning {
+  p {
+    padding: 0;
+    margin: 0.5em 0 0 0;
+  }
+
+  p, span {
+    text-align: justify;
+  }
+
+  input#edit_java_options {
+    width: 100%;
+    color: cyan;
+    margin-bottom: 0.25em
+  }
+
+  .severe {
+    color: orangered;
+  }
+
+  .warning {
+    color: orange;
+  }
+
+}
+
+
+div.clientMemoryOptions {
+  label {
+    &.right {
+      text-align: right;
+    }
+
+    &.power-of-2 {
+      color: #00542f;
+    }
+
+    &.non-power-of-2 {
+      color: #075465;
+    }
+
+    &.low_memory_warning {
+      color: orange;
+    }
+
+    &.critically_low_memory_warning {
+      color: red;
+    }
+  }
+
+  input[type="number"] {
+    outline-color: #075465;
+
+    &.invalid, &.critical {
+      color: red;
+      border-color: #622;
+      outline-color: firebrick;
+    }
+
+    &.warning {
+      color: orange;
+      border-color: #640;
+      outline-color: orange;
+    }
+  }
+
+
+  .field-group {
+
+    input.slider-group {
+      float: left;
+      height: 2.5em;
+      text-align: center;
+
+      &.wide {
+        width: 80% !important;
+      }
+    }
+
+    input[type="number"].slider-group {
+      width: 6em !important;
+    }
+
+    input[type="range"].slider-group {
+      height: 2em !important;
+    }
+  }
+
+  hr {
+    margin-bottom: 3px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+}
+
+
+form {
+  margin-top: 10px;
+
+
+  div.advanced-memory {
+    .field-group {
+      &:first {
+        margin-left: 0px !important;
+        background-color: cyan !important;
+      }
+
+      margin-top: 16px !important;
+    }
+  }
+
+  .field-group {
+    float: left;
+    margin-left: 16px;
+
+    &.block {
+      clear: both;
+    }
+
+    &.primary {
+      width: 100%;
+      clear: both;
+      margin-bottom: 16px;
+
+      label {
+        display: block;
+        width: 100% !important;
+      }
+    }
+  }
+
+
+  label {
+    color: #A1A6Ac;
+    font-size: 12px;
+    font-family: 'Ubuntu';
+
+    sup {
+      cursor: pointer;
+      margin-left: 4px;
+    }
+  }
+
+  select, input, textarea {
+    background-color: #191F29;
+    border: 2px solid #30303C;
+    color: #FFFFFF;
+    font-family: 'Ubuntu';
+    font-size: 12px;
+    padding: 5px;
+
+    &.wide {
+      width: 70%;
+    }
+
+    &.inline-slider {
+      float: left;
+      height: 2.5em;
+    }
+  }
+
+  input {
+    width: 80px;
+  }
+
+  button {
+    background-color: #30303C;
+    border: 0;
+    color: #FFFFFF;
+    font-family: 'Ubuntu';
+    font-size: 12px;
+    padding: 5px 8px;
+    text-transform: uppercase;
+  }
+}
+
+:disabled {
+  color: #666666 !important;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  img.logo {
+    left: 21px;
+    position: absolute;
+    z-index: 1;
+    -webkit-app-region: drag;
+  }
+
+  .top {
+    background-image: url(../images/main/header_top.png);
+    color: #FFFFFF;
+    height: 99px;
+    margin-bottom: 4px;
+    overflow: hidden; // clearfix
+    position: relative;
+    width: 800px;
+    -webkit-app-region: drag;
+
+    img.schine-logo {
+      position: absolute;
+      right: 54px;
+      top: 10px;
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      li {
+        float: left;
+      }
+
+      &.window-controls {
+        position: absolute;
+        right: 8px;
+        top: 6px;
+
+        li {
+          padding: 0;
+          -webkit-app-region: no-drag;
+        }
+
+        li:not(:last-child) {
+          padding-right: 8px;
+        }
+      }
+
+      &.nav {
+        bottom: 5px;
+        left: 170px;
+        position: absolute;
+
+        &.nav-right {
+          left: auto;
+          right: 0;
+        }
+
+        li {
+          a {
+            color: #1F758E;
+            cursor: pointer;
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 12px 20px;
+            text-transform: uppercase;
+            -webkit-app-region: no-drag;
+
+            span.nav-options-gear {
+              background-image: url(../images/main/nav_options_gear_btn.png);
+              background-position: 0 0;
+              background-repeat: no-repeat;
+              float: left;
+              height: 20px;
+              margin-top: -3px;
+              margin-right: 4px;
+              transition: opacity .3s;
+              width: 20px;
+
+              &.hover {
+                background-position: -20px 0;
+                margin-left: -24px;
+                opacity: 0;
+              }
+            }
+
+            &.active, &:hover {
+              background-color: #121526;
+              color: #FFFFFF;
+
+              span.nav-options-gear.hover {
+                opacity: 1;
+                transition: opacity .3s;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .content {
+    height: 340px;
+    padding: 2px 5px;
+    position: relative;
+    overflow: auto;
+    width: 100%;
+
+    iframe, img {
+      max-width: 100%;
+    }
+
+    &.no-footer {
+      height: calc(~'100% - 74px');
+    }
+  }
+
+  .footer {
+    background-color: #16151B;
+    bottom: 0;
+    height: 107px;
+    position: static;
+    width: 100%;
+
+    a.player {
+      float: right;
+    }
+
+    a.gear {
+      background-image: url(../images/main/launch_options_gear.png);
+      background-repeat: no-repeat;
+      background-size: 100%;
+      display: inline-block;
+      height: 17px;
+      margin-left: 5px;
+      width: 18px;
+
+      &.gear-memory {
+        bottom: 30px;
+        height: 24px;
+        position: absolute;
+        right: 242px;
+        width: 23px;
+        background-image: url(../images/main/memory_options_gear.png);
+        z-index: 1;
+      }
+    }
+
+    ul.tabs {
+      font-size: 11px;
+      list-style: none;
+      margin: 0;
+      overflow: hidden; // clearfix
+      padding: 0;
+
+      li {
+        float: left;
+        padding: 7px 0 9px 22px;
+        width: 127px;
+
+        a {
+          color: #A1A6AC;
+          cursor: pointer;
+        }
+      }
+    }
+
+    div.play {
+      background-image: url(../images/main/footer_normalplay_bg.jpg);
+      overflow: hidden; // clearfix
+    }
+
+    div.dedicated {
+      background-image: url(../images/main/footer_dedicated_bg.jpg);
+      overflow: hidden; // clearfix
+    }
+
+    div.status {
+      bottom: 75px;
+      color: #A1A6AC;
+      font-family: 'Ubuntu';
+      font-size: 10px;
+      line-height: 1.2;
+      height: 31px;
+      padding-top: 4px;
+      position: absolute;
+      right: 16px;
+      text-align: center;
+      width: 217px;
+    }
+
+    div.update-bg {
+      background-image: url(../images/main/update_btn.png);
+      bottom: 0;
+      position: absolute;
+      right: 0;
+      height: 108px;
+      transition: .3s;
+      width: 300px;
+
+      &.hover {
+        background-image: url(../images/main/update_roll.png);
+      }
+    }
+
+    a.update {
+      bottom: 13px;
+      height: 61px;
+      position: absolute;
+      right: 17px;
+      width: 214px;
+    }
+
+    div.launch-bg {
+      background-image: url(../images/main/launch_btn.png);
+      bottom: 0;
+      position: absolute;
+      right: 0;
+      height: 108px;
+      transition: .3s;
+      width: 300px;
+
+      &.hover {
+        background-image: url(../images/main/launch_roll.png);
+      }
+    }
+
+    a.launch {
+      bottom: 13px;
+      height: 61px;
+      position: absolute;
+      right: 17px;
+      width: 214px;
+    }
+  }
+}
+
+.hidden {
+  height: 1px;
+  left: -10000px;
+  overflow: hidden;
+  position: absolute;
+  top: auto;
+  width: 1px;
+}
+
+.clearfix {
+  clear: both;
+}
+
+span.code {
+  padding: 0.2em;
+  font-family: courier, monospace;
+  color: cyan;
+  background-color: rgba(200, 200, 255, 0.1);
+}
+
+
+footer {
+  bottom: 4px;
+  color: #666666;
+  font-size: 10px;
+  padding: 13px 16px 16px;
+  position: absolute;
+  z-index: 1;
+
+  span {
+    float: left;
+  }
+
+  ul.links {
+    float: right;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      float: left;
+
+      &:not(:last-child) {
+        margin-right: 4px;
+      }
+
+      a {
+        color: #666666;
+
+        &:hover {
+          color: #FFFFFF;
+        }
+      }
+    }
+  }
+}
+
+div.launcher-options-popup {
+  form {
+    margin-top: 0;
+  }
+
+  div.popup-container {
+    // Raise the options popup a bit as it's taller.
+    top: 21% !important;
+  }
+
+  div.popup-body {
+    div.field-group {
+      &.launcher-options {
+        overflow: hidden; // clearfix
+
+
+        input {
+          float: left;
+          width: 231px;
+          font-size: 75%;
+        }
+
+        button {
+          cursor: pointer;
+          float: left;
+          margin-left: 0 !important; // Important to override :not(:first-child) rule
+          width: 231px;
+          white-space: nowrap;
+        }
+
+        span.highlight {
+          color: white;
+        }
+
+
+        span.description {
+          display: block;
+          float: left;
+          font-size: 10px;
+          margin-left: 8px;
+          width: 158px;
+          line-height: 110%; // as linux-webkit has a different default
+
+          &.status {
+            margin-top: 0.5em;
+            color: #1f7282;
+          }
+
+          &.error {
+            color: #c80a0a;
+          }
+
+          &:not(:last-child) {
+            height: 29px;
+          }
+        }
+      }
+    }
+  }
+}
+
+ul.side {
+  float: left;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    background-color: @contentBackground;
+    border: 1px solid @contentBorder;
+    height: 108px;
+    width: 200px;
+
+    a {
+      display: block;
+      height: 100%;
+      width: 100%;
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 6px;
+    }
+  }
+}
+
+.content(@height: 336px, @top: 2px, @left: 0) {
+  background-color: @contentBackground;
+  border: 1px solid @contentBorder;
+  display: inline-block;
+  height: @height;
+  margin: 0;
+  overflow: auto;
+  padding: 0;
+  position: absolute;
+  list-style: none;
+  top: @top;
+  width: 587px;
+
+  & when (@left = 0) {
+    float: right;
+    right: 5px;
+  }
+
+  & when not (@left = 0) {
+    left: @left;
+  }
+}
+
+.links() {
+  margin: 0;
+  list-style: none;
+  padding: 0;
+  position: absolute;
+  top: 35px;
+
+  li {
+    color: #207583;
+    float: left;
+    font-size: 12px;
+    font-weight: lighter;
+
+    &:not(:last-child):after {
+      color: #3B3A40;
+      content: "|";
+      margin: 0 5px;
+    }
+  }
+}
+
+@import 'auth.less';
+@import 'community.less';
+@import 'council.less';
+@import 'getting_started.less';
+@import 'news.less';
+@import 'popup.less';
+@import 'progressBar.less';
+@import 'support.less';
+@import 'update.less';
+@import 'citizenBroadcast.less';
